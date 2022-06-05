@@ -48,7 +48,7 @@ public class MenuTeste {
 	}
 	
 	public void drawAdminMenu() {
-		
+		System.out.println("teste");
 	}
 	
 	public void drawTuristaMenu() {
