@@ -23,10 +23,10 @@ public class GereLocal {
 			info = scanner.nextLine();
 		}
 		
-		System.out.println("-> Localização?");
+		System.out.println("-> Localizaï¿½ï¿½o?");
 		String loc = scanner.nextLine();
 		while (loc.length() < 1) {
-			System.out.println("-> Localização?");
+			System.out.println("-> Localizaï¿½ï¿½o?");
 			loc = scanner.nextLine();
 		}
 		
@@ -57,7 +57,7 @@ public class GereLocal {
 			return;
 		}
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("-> Escolha para ver informação mais detalhada");
+		System.out.println("-> Escolha para ver informaï¿½ï¿½o mais detalhada");
 		int save = 0;
 		for (int i = 0; i < (locaisFiltrados.size()); i++) {
 			System.out.println("[" + (i + 1) + "] " + locais.get(i).getNome());
@@ -70,17 +70,17 @@ public class GereLocal {
 		}
 		if (in > 0 && in <= locaisFiltrados.size()) { //TODO Validar que existe
 			Local local = locaisFiltrados.get(in - 1);
-			System.out.println("Sobre -> " + local.getInfo() + "\nLocalização -> " + local.getLoc());
+			System.out.println("Sobre -> " + local.getInfo() + "\nLocalizaï¿½ï¿½o -> " + local.getLoc());
 			if (local.hasAvaliacoes()) {
-				System.out.println("-> Classificação do " + tipo.toString().toLowerCase() + " - " + local.getRate());
+				System.out.println("-> Classificaï¿½ï¿½o do " + tipo.toString().toLowerCase() + " - " + local.getRate());
 			}
 			System.out.println("[0] para sair\n[1] avaliar local");
 			in = scanner.nextInt();
 			if (in == 1) {
-				System.out.println("-> De uma avaliaçao de 1 a 5");
+				System.out.println("-> De uma avaliaï¿½ao de 1 a 5");
 				int rate = scanner.nextInt();
 				while (rate < 0 && rate > 5) {
-					System.out.println("-> De uma avaliaçao de 1 a 5");
+					System.out.println("-> De uma avaliaï¿½ao de 1 a 5");
 					rate = scanner.nextInt();
 				}
 				Avaliacao avaliacao = new Avaliacao(rate, user);
@@ -94,7 +94,7 @@ public class GereLocal {
 		for (int i = 0; i < locais.size(); i++) {
 			for (int j = 0; j < locais.get(i).getAvaliacoes().size(); j++) {
 				System.out.println("-> " + locais.get(i).getAvaliacoes().get(j).getUser().getNome() 
-						+ " deu uma avaliação de " + locais.get(i).getAvaliacoes().get(j).getRate()
+						+ " deu uma avaliaï¿½ï¿½o de " + locais.get(i).getAvaliacoes().get(j).getRate()
 						+ " ao " + locais.get(i).getNome());
 			}
 		}
@@ -113,9 +113,9 @@ public class GereLocal {
 		
 		for (int i = 0; i < locais.size(); i++) {
 			if (nome.equals(locais.get(i).getNome())) {
-				System.out.println("Sobre -> " + locais.get(i).getInfo() + "\nLocalização -> " + locais.get(i).getLoc());
+				System.out.println("Sobre -> " + locais.get(i).getInfo() + "\nLocalizaï¿½ï¿½o -> " + locais.get(i).getLoc());
 				if (locais.get(i).getRate() > 0) {
-					System.out.println("-> Classificação do " + locais.get(i).getTipo().toString().toLowerCase() 
+					System.out.println("-> Classificaï¿½ï¿½o do " + locais.get(i).getTipo().toString().toLowerCase() 
 							+ " - " + locais.get(i).getRate());
 				}
 			}
@@ -125,7 +125,7 @@ public class GereLocal {
 	public void editLocal() {
 		if (locais.size() > 0) {
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("-> Escolha para ver informação mais detalhada");
+			System.out.println("-> Escolha para ver informaï¿½ï¿½o mais detalhada");
 			for (int i = 0; i < (locais.size()); i++) {
 				System.out.println("[" + (i + 1) + "] " + locais.get(i).getNome());
 			}
@@ -137,8 +137,8 @@ public class GereLocal {
 				Local local = locais.get(i);
 				System.out.println("Nome -> " + local.getNome()
 						+ "\nSobre -> " + local.getInfo() 
-						+ "\nLocalização -> " + local.getLoc());
-				System.out.println("[0] para sair\n[1] editar nome\n[2] editar informação\n[3] editar localização");
+						+ "\nLocalizaï¿½ï¿½o -> " + local.getLoc());
+				System.out.println("[0] para sair\n[1] editar nome\n[2] editar informaï¿½ï¿½o\n[3] editar localizaï¿½ï¿½o");
 				menu = scanner.nextInt();
 				if (menu != 0) {
 					Scanner scan = new Scanner(System.in);
@@ -146,7 +146,7 @@ public class GereLocal {
 						System.out.println("-> Nome novo?");
 						String novoNome = scan.nextLine();
 						if (novoNome.equals(local.getLoc())) {
-							System.out.println("Convém mudares o nome");
+							System.out.println("Convï¿½m mudares o nome");
 						}
 						else {
 							locais.get(i).setNome(novoNome);
@@ -154,25 +154,25 @@ public class GereLocal {
 						}
 					}
 					if (menu == 2) {
-						System.out.println("-> Informação nova?");
+						System.out.println("-> Informaï¿½ï¿½o nova?");
 						String novaInfo = scan.nextLine();
 						if (novaInfo.equals(local.getLoc())) {
-							System.out.println("Convém mudares a info");
+							System.out.println("Convï¿½m mudares a info");
 						}
 						else {
 							locais.get(i).setInfo(novaInfo);
-							System.out.println("-> Informação alterada com sucesso");
+							System.out.println("-> Informaï¿½ï¿½o alterada com sucesso");
 						}
 					}
 					if (menu == 3) {
-						System.out.println("-> Localização nova?");
+						System.out.println("-> Localizaï¿½ï¿½o nova?");
 						String novaLoc = scan.nextLine();
 						if (novaLoc.equals(local.getLoc())) {
-							System.out.println("Convém mudares a localização");
+							System.out.println("Convï¿½m mudares a localizaï¿½ï¿½o");
 						}
 						else {
 							locais.get(i).setLoc(novaLoc);
-							System.out.println("-> Localização alterada com sucesso");
+							System.out.println("-> Localizaï¿½ï¿½o alterada com sucesso");
 						}
 					}
 				}
