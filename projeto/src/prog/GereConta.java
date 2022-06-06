@@ -17,7 +17,6 @@ public class GereConta {
 				return false;
 			}
 		}
-		
 		return contas.add(conta);
 	}
 	

@@ -1,17 +1,12 @@
 package prog;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import prog.Conta.ContaType;
 
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.*;
-import java.util.Scanner;
 
-import prog.Conta;
-import prog.GereConta;
-//import prog.Menu;
 
 public class MenuTeste {
 
@@ -20,6 +15,10 @@ public class MenuTeste {
 	
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel("New label");
+		imagem.setIcon(new ImageIcon("C:\\Users\\deagl\\Desktop\\projetos\\interdisciplinar\\projeto\\src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		imagem.setBounds(0, 0, 300,300);
 		
 		JButton criar = new JButton("Criar conta");
 		criar.setBounds(15,200,120,20);
@@ -41,14 +40,21 @@ public class MenuTeste {
 		
 		frame.add(login);
 		frame.add(criar);
+		frame.add(imagem);
 		frame.setSize(300,300);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		frame.setTitle("Projeto - Menu principal");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\deagl\\Desktop\\projeto\\src\\img\\icon.jpg"));
 		frame.repaint();
 	}
 	
 	public void drawAdminMenu() {
 		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel("New label");
+		imagem.setIcon(new ImageIcon("C:\\Users\\deagl\\Desktop\\projetos\\interdisciplinar\\projeto\\src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		imagem.setBounds(0, 0, 300,300);
 		
 		JButton criar = new JButton("Criar local");
 		criar.setBounds(15,200,120,20);
@@ -79,14 +85,21 @@ public class MenuTeste {
 		frame.add(edit);
 		frame.add(criar);
 		frame.add(back);
+		frame.add(imagem);
 		frame.setSize(300,300);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		frame.setTitle("Projeto - Menu admin");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\deagl\\Desktop\\projeto\\src\\img\\icon.jpg"));
 		frame.repaint();
 	}
 	
 	public void drawTuristaMenu() {
 		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel("New label");
+		imagem.setIcon(new ImageIcon("C:\\Users\\deagl\\Desktop\\projetos\\interdisciplinar\\projeto\\src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		imagem.setBounds(0, 0, 300,300);
 		
 		JButton criar = new JButton("Ver locais");
 		criar.setBounds(15,200,120,20);
@@ -117,9 +130,12 @@ public class MenuTeste {
 		frame.add(edit);
 		frame.add(criar);
 		frame.add(back);
+		frame.add(imagem);
 		frame.setSize(300,300);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		frame.setTitle("Projeto - Menu turista");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\deagl\\Desktop\\projeto\\src\\img\\icon.jpg"));
 		frame.repaint();
 		
 	}
@@ -127,7 +143,13 @@ public class MenuTeste {
 	
 	public void drawCreateAccount() {
 		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel("New label");
+		imagem.setIcon(new ImageIcon("C:\\Users\\deagl\\Desktop\\projetos\\interdisciplinar\\projeto\\src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		imagem.setBounds(0, 0, 450,300);
+		
 		JLabel nameLabel = new JLabel("Nome");
+		nameLabel.setBackground(Color.WHITE);
 		nameLabel.setBounds(75,30,60,30);
 		
 		JTextField name = new JTextField("");
@@ -135,6 +157,7 @@ public class MenuTeste {
 		
 		JLabel passLabel = new JLabel("Password");
 		passLabel.setBounds(60,70,60,30);
+		passLabel.setBackground(Color.WHITE);
 		
 		JPasswordField password = new JPasswordField("");
 		password.setBounds(150,70,200,30);
@@ -144,6 +167,8 @@ public class MenuTeste {
 		JRadioButton r2=new JRadioButton("Admin");   
 		r1.setBounds(90,140,100,30);
 		r2.setBounds(240,140,100,30);
+		r1.setBackground(new Color(0,0,0,0));
+		r2.setBackground(new Color(0,0,0,0));
 		
 		ButtonGroup bg = new ButtonGroup();    
 		bg.add(r1);
@@ -203,7 +228,10 @@ public class MenuTeste {
 		frame.add(password);
 		frame.add(r1);
 		frame.add(r2);
+		frame.add(imagem);
 		frame.setSize(450,300);
+		frame.setTitle("Projeto - Criar conta");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\deagl\\Desktop\\projeto\\src\\img\\icon.jpg"));
 		frame.repaint();
 		
 		
@@ -211,6 +239,11 @@ public class MenuTeste {
 	
 	public void drawLoginAccount() {
 		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel("New label");
+		imagem.setIcon(new ImageIcon("C:\\Users\\deagl\\Desktop\\projetos\\interdisciplinar\\projeto\\src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		imagem.setBounds(0, 0, 450,300);
+		
 		JLabel nameLabel = new JLabel("Nome");
 		nameLabel.setBounds(75,30,60,30);
 		
@@ -280,13 +313,21 @@ public class MenuTeste {
 		frame.add(name);
 		frame.add(passLabel);
 		frame.add(password);
+		frame.add(imagem);
 		frame.setSize(450,300);
+		frame.setTitle("Projeto - Entrar conta");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\deagl\\Desktop\\projeto\\src\\img\\icon.jpg"));
 		frame.repaint();
 		
 	}
 	
 	public void drawCreateLocal() {
 		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel("New label");
+		imagem.setIcon(new ImageIcon("C:\\Users\\deagl\\Desktop\\projetos\\interdisciplinar\\projeto\\src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		imagem.setBounds(0, 0, 450,300);
+		
 		JLabel nameLabel = new JLabel("Nome");
 		nameLabel.setBounds(75,30,60,30);
 		
@@ -294,21 +335,23 @@ public class MenuTeste {
 		name.setBounds(150,30,200,30);
 		
 		JLabel infoLabel = new JLabel("Info");
-		infoLabel.setBounds(75,70,60,30);
+		infoLabel.setBounds(80,70,60,30);
 		
 		JTextField info = new JTextField("");
 		info.setBounds(150,70,200,30);
 		
-		JLabel locLabel = new JLabel("Localizaçao");
-		infoLabel.setBounds(75,110,60,30);
+		JLabel locLabel = new JLabel("Localizacao");
+		locLabel.setBounds(50,110,80,30);
 		
 		JTextField loc = new JTextField("");
 		loc.setBounds(150,110,200,30);
 		
 		JRadioButton r1=new JRadioButton("Museu");    
 		JRadioButton r2=new JRadioButton("Monumento");   
-		r1.setBounds(90,140,100,30);
-		r2.setBounds(240,140,100,30);
+		r1.setBounds(90,150,100,30);
+		r2.setBounds(240,150,100,30);
+		r1.setBackground(new Color(0,0,0,0));
+		r2.setBackground(new Color(0,0,0,0));
 		
 		ButtonGroup bg = new ButtonGroup();    
 		bg.add(r1);
@@ -340,6 +383,7 @@ public class MenuTeste {
 		
 		JButton back = new JButton("Voltar");
 		back.setBounds(160,200,120,20);
+		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawAdminMenu();
@@ -356,7 +400,10 @@ public class MenuTeste {
 		frame.add(loc);
 		frame.add(r1);
 		frame.add(r2);
+		frame.add(imagem);
 		frame.setSize(450,300);
+		frame.setTitle("Projeto - Criar local");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\deagl\\Desktop\\projeto\\src\\img\\icon.jpg"));
 		frame.repaint();
 	}
 	
@@ -376,10 +423,10 @@ public class MenuTeste {
 		JFrame errorFrame = new JFrame("Error");
 
 		JLabel errorLabel = new JLabel(error);
-		errorLabel.setBounds(60,50,150,200);
+		errorLabel.setBounds(20,0,100,70);
 
 		errorFrame.add(errorLabel);
-		errorFrame.setSize(250,250);
+		errorFrame.setSize(100,100);
 		errorFrame.setLayout(null);
 		errorFrame.setVisible(true);
 	}
