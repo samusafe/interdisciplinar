@@ -177,8 +177,7 @@ public class GereLocal {
 					}
 				}
 			} while (menu != 0);
-		}
-		else {
+		} else {
 			System.out.println("-> Nenhum local criado");
 		}
 	}

@@ -122,7 +122,6 @@ public class MenuTeste {
 		frame.setVisible(true);
 		frame.repaint();
 		
-		
 	}
 	
 	
