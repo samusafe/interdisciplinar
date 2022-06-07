@@ -44,7 +44,8 @@ public class MenuTeste {
 		frame.setSize(300,300);
 		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setTitle("Projeto - Menu principal");
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
 		frame.repaint();
 	}
@@ -89,7 +90,8 @@ public class MenuTeste {
 		frame.setSize(300,300);
 		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setTitle("Projeto - Menu admin");
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\icon.jpg"));
 		frame.repaint();
 	}
@@ -134,7 +136,8 @@ public class MenuTeste {
 		frame.setSize(300,300);
 		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setTitle("Projeto - Menu turista");
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
 		frame.repaint();
 		
@@ -220,8 +223,10 @@ public class MenuTeste {
 		frame.add(password);
 		frame.add(r1);
 		frame.add(r2);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.setSize(450,300);
-		frame.setTitle("Projeto - Criar conta");
+		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
 		frame.repaint();
 		
@@ -300,8 +305,10 @@ public class MenuTeste {
 		frame.add(name);
 		frame.add(passLabel);
 		frame.add(password);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.setSize(450,300);
-		frame.setTitle("Projeto - Entrar conta");
+		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
 		frame.repaint();
 		
@@ -380,8 +387,10 @@ public class MenuTeste {
 		frame.add(loc);
 		frame.add(r1);
 		frame.add(r2);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.setSize(450,300);
-		frame.setTitle("Projeto - Criar local");
+		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
 		frame.repaint();
 	}
@@ -407,6 +416,7 @@ public class MenuTeste {
 		errorFrame.add(errorLabel);
 		errorFrame.setSize(100,100);
 		errorFrame.setLayout(null);
+		errorFrame.setResizable(false);
 		errorFrame.setVisible(true);
 	}
 
