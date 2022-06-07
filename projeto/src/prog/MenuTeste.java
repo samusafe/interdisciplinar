@@ -4,10 +4,8 @@ import javax.swing.*;
 import prog.Conta.ContaType;
 import prog.Local.LocalTipo;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.*;
-import java.util.List;
 
 public class MenuTeste {
 
@@ -18,8 +16,7 @@ public class MenuTeste {
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
 		
-		JLabel imagem = new JLabel("New label");
-		imagem.setIcon(new ImageIcon("src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		JLabel imagem = new JLabel(new ImageIcon(getClass().getResource("/img/Beautiful_Sunrise_with_Sun_Background-450.jpg")));
 		imagem.setBounds(0, 0, 300,300);
 		
 		JButton criar = new JButton("Criar conta");
@@ -48,15 +45,15 @@ public class MenuTeste {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
 	public void drawAdminMenu() {
 		frame.getContentPane().removeAll();
 		
-		JLabel imagem = new JLabel("New label");
-		imagem.setIcon(new ImageIcon("src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		JLabel imagem = new JLabel(new ImageIcon(getClass().getResource("/img/Beautiful_Sunrise_with_Sun_Background-450.jpg")));
 		imagem.setBounds(0, 0, 300,300);
 		
 		JButton criar = new JButton("Criar local");
@@ -94,15 +91,15 @@ public class MenuTeste {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
 	public void drawTuristaMenu() {
 		frame.getContentPane().removeAll();
 		
-		JLabel imagem = new JLabel("New label");
-		imagem.setIcon(new ImageIcon("src\\img\\Beautiful_Sunrise_with_Sun_Background-450.jpg"));
+		JLabel imagem = new JLabel(new ImageIcon(getClass().getResource("/img/Beautiful_Sunrise_with_Sun_Background-450.jpg")));
 		imagem.setBounds(0, 0, 300,300);
 		
 		JButton criar = new JButton("Ver locais");
@@ -140,7 +137,9 @@ public class MenuTeste {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 		
 	}
@@ -229,7 +228,8 @@ public class MenuTeste {
 		frame.setResizable(false);
 		frame.setSize(450,300);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 		
 		
@@ -304,7 +304,8 @@ public class MenuTeste {
 		frame.setResizable(false);
 		frame.setSize(450,300);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 		
 	}
@@ -400,7 +401,8 @@ public class MenuTeste {
 		frame.setResizable(false);
 		frame.setSize(450,300);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -435,7 +437,8 @@ public class MenuTeste {
 		frame.setResizable(false);
 		frame.setSize(450,300);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -464,7 +467,8 @@ public class MenuTeste {
 		frame.setResizable(false);
 		frame.setSize(450,300);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -482,6 +486,7 @@ public class MenuTeste {
 		errorFrame.setSize(100,100);
 		errorFrame.setLayout(null);
 		errorFrame.setResizable(false);
+		errorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		errorFrame.setVisible(true);
 	}
 
