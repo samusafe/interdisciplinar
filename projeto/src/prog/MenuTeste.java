@@ -7,7 +7,7 @@ import prog.Local.LocalTipo;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.*;
-
+import java.util.List;
 
 public class MenuTeste {
 
@@ -27,8 +27,7 @@ public class MenuTeste {
 		criar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				drawCreateAccount();
-				
+				drawCreateAccount();	
 			}
 		});
 		
@@ -271,19 +270,12 @@ public class MenuTeste {
 					return;
 				}
 				else {
-					Conta conta = null;
-					for (int i = 0; i < GereConta.contas.size(); i++) {
-						conta = GereConta.contas.get(i);
+					String pw = "";
+					for (int i = 0; i < password.getPassword().length; i++) {
+						pw += password.getPassword()[i];
 					}
 					
-					if (conta == null) {
-						return;
-					}
-					
-					ContaType tipo = null;
-					gereConta.entrarConta(name.getText(), password.getPassword(), tipo);
-					
-					if (conta.getTipo() == ContaType.ADMIN) {
+					if (gereConta.entrarConta(name.getText(), pw) == ContaType.ADMIN) {
 						drawAdminMenu();
 					} else {
 						drawTuristaMenu();
@@ -413,11 +405,67 @@ public class MenuTeste {
 	}
 	
 	public void drawEditLocal() {
-		System.out.println("editar local");
+		frame.getContentPane().removeAll();
+	    String bigList[] = new String[30];
+	    
+
+	    for (int i = 0; i < bigList.length; i++) {
+	      bigList[i] = Integer.toString(i);
+	    }
+	    
+
+
+	    String choice = (String) JOptionPane.showInputDialog(frame, "Escolhe o local", "Locais", JOptionPane.QUESTION_MESSAGE,
+	        null, bigList, "Titan");
+	    
+	    System.out.println(choice);
+
+		
+		JButton back = new JButton("Voltar");
+		back.setBounds(160,200,120,20);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawAdminMenu();
+			}
+		});
+		
+		frame.add(back);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setSize(450,300);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.repaint();
 	}
 	
 	public void drawSeeLocal() {
-		System.out.println("ver local");
+		frame.getContentPane().removeAll();
+		
+		JList list = new JList(gereLocal.locais.toArray());
+		JScrollPane scrollpane = new JScrollPane();
+		JPanel panel = new JPanel();
+		panel.add(scrollpane);
+		scrollpane.getViewport().add(list);
+		JOptionPane.showMessageDialog(null, scrollpane, 
+		      "Please select an object", JOptionPane.PLAIN_MESSAGE);
+		
+		JButton back = new JButton("Voltar");
+		back.setBounds(160,200,120,20);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawAdminMenu();
+			}
+		});
+		
+		frame.add(back);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setSize(450,300);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\img\\icon.jpg"));
+		frame.repaint();
 	}
 	
 	public void drawSearchLocal() {

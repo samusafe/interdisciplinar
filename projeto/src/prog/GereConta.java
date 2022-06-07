@@ -20,19 +20,15 @@ public class GereConta {
 		return contas.add(conta);
 	}
 	
-	public ContaType entrarConta(String nome, char[] password, ContaType tipo) {
-		String pw = "";
-		for (int i = 0; i < password.length; i++) {
-			pw += password[i];
-		}
-		Conta conta = new Conta(nome, pw, tipo);
+	public ContaType entrarConta(String nome, String password) {
 		for (int i = 0; i < contas.size(); i++) {
-			if (contas.get(i).getNome().equals(conta.getNome())) {
-				if (contas.get(i).getPassword().equals(conta.getPassword())) {
-					return contas.get(i).getTipo();
+			if (contas.get(i).getNome().equals(nome)) {
+				if (contas.get(i).getPassword().equals(password)) {
+					ContaType tipo = contas.get(i).getTipo();
+					return tipo;
 				}
 			}
 		}
-		return tipo;
+		return null;
 	}
 }

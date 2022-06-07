@@ -6,7 +6,7 @@ import prog.Local.LocalTipo;
 import java.util.ArrayList;
 
 public class GereLocal {
-	private static ArrayList<Local> locais = new ArrayList<>();
+	static ArrayList<Local> locais = new ArrayList<>();
 	public boolean criarLocal(String nome, String info, String loc, LocalTipo tipo) {
 		Local local = new Local(nome, info, loc, tipo);
 		for (int i = 0; i < locais.size(); i++) {

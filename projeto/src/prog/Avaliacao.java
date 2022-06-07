@@ -25,6 +25,4 @@ public class Avaliacao {
 	public void setUser(Conta user) {
 		this.user = user;
 	}
-	
-
 }
