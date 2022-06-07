@@ -7,7 +7,7 @@ import prog.Local.LocalTipo;
 import java.awt.Toolkit;
 import java.awt.event.*;
 
-public class MenuTeste {
+public class Menu {
 
 	private JFrame frame = new JFrame("Projeto");
 	private GereConta gereConta = new GereConta();
@@ -486,12 +486,11 @@ public class MenuTeste {
 		errorFrame.setSize(100,100);
 		errorFrame.setLayout(null);
 		errorFrame.setResizable(false);
-		errorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		errorFrame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		MenuTeste menu = new MenuTeste();
+		Menu menu = new Menu();
 		menu.drawMainMenu();
 	}
 }
