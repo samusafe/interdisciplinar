@@ -2,6 +2,7 @@ package prog;
 import javax.swing.*;
 
 import prog.Conta.ContaType;
+import prog.Local.LocalTipo;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -12,6 +13,7 @@ public class MenuTeste {
 
 	private JFrame frame = new JFrame("Projeto");
 	private GereConta gereConta = new GereConta();
+	private GereLocal gereLocal = new GereLocal();
 	
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
@@ -366,6 +368,20 @@ public class MenuTeste {
 					showError("Escolha um tipo");
 					return;
 				}
+				
+				LocalTipo tipo;
+				if (r1.isSelected()) {
+					tipo = LocalTipo.MONUMENTO;
+				} else {
+					tipo = LocalTipo.MUSEU;
+				}
+				
+				if (gereLocal.criarLocal(name.getText(), info.getText(), loc.getText(), tipo) == false) {
+					showError("Ja existe um local com essas informacoes");
+					return;
+				}
+				
+				showError("Local criado");
 			}
 		});
 		

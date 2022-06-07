@@ -7,45 +7,14 @@ import java.util.ArrayList;
 
 public class GereLocal {
 	private static ArrayList<Local> locais = new ArrayList<>();
-	public void criarLocal() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("-> Nome?");
-		String nome = scanner.nextLine();
-		while (nome.length() < 1) {
-			System.out.println("-> Nome?");
-			nome = scanner.nextLine();
+	public boolean criarLocal(String nome, String info, String loc, LocalTipo tipo) {
+		Local local = new Local(nome, info, loc, tipo);
+		for (int i = 0; i < locais.size(); i++) {
+			if (local.equals(locais.get(i))) {
+				return false;
+			}
 		}
-		
-		System.out.println("-> Info?");
-		String info = scanner.nextLine();
-		while (info.length() < 1) {
-			System.out.println("-> Info?");
-			info = scanner.nextLine();
-		}
-		
-		System.out.println("-> Localiza��o?");
-		String loc = scanner.nextLine();
-		while (loc.length() < 1) {
-			System.out.println("-> Localiza��o?");
-			loc = scanner.nextLine();
-		}
-		
-		System.out.println("[1] Museu \n[2] Monumento");
-		int escolha = scanner.nextInt();
-		while (escolha < 0 && escolha > 2) {
-			System.out.println("[1] Museu \n[2] Monumento");
-			escolha = scanner.nextInt();
-		}
-		if (escolha == 1) {
-			Local local = new Local(nome, info, loc, LocalTipo.MUSEU);
-			locais.add(local);
-			System.out.println("-> Museu criado com sucesso.");
-		}
-		else if (escolha == 2) {
-			Local local = new Local(nome, info, loc, LocalTipo.MONUMENTO);
-			locais.add(local);
-			System.out.println("-> Monumento criado com sucesso.");
-		}
+		return locais.add(local);
 	}
 	
 	public void printLocal(Conta user, int escolha) {
