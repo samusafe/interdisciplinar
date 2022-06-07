@@ -9,7 +9,7 @@
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
 ![alt text](src/img/Beautiful_Sunrise_with_Sun_Background-450.jpg)
-<img src="Beautiful_Sunrise_with_Sun_Background-450.jpg" alt="imagem">
+<img src="interdisciplinar/projeto/src/img/Beautiful_Sunrise_with_Sun_Background-450.jpg" alt="imagem">
 
 > Programa para a criação, edição e visualizamento de locais. Pode ser gerido via admin e via turista, via admin que fará a gestão do programa e via turista para usufruir do programa.
 
