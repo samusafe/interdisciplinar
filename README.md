@@ -8,7 +8,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-<img src="img\\Beautiful_Sunrise_with_Sun_Background-450.jpg" alt="imagem">
+<img src="projeto/src/img/Beautiful_Sunrise_with_Sun_Background-450.jpg" alt="imagem">
 
 > Programa para a criação, edição e visualizamento de locais. Pode ser gerido via admin e via turista, via admin que fará a gestão do programa e via turista para usufruir do programa.
 
@@ -38,4 +38,4 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-[⬆ Voltar ao topo](#interdisciplinar<br>
+[⬆ Voltar ao topo](#interdisciplinar)<br>
