@@ -4,6 +4,7 @@ import javax.swing.*;
 import prog.Conta.ContaType;
 import prog.Local.LocalTipo;
 
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
 
@@ -137,7 +138,6 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
@@ -415,8 +415,6 @@ public class Menu {
 	      bigList[i] = Integer.toString(i);
 	    }
 	    
-
-
 	    String choice = (String) JOptionPane.showInputDialog(frame, "Escolhe o local", "Locais", JOptionPane.QUESTION_MESSAGE,
 	        null, bigList, "Titan");
 	    
@@ -443,33 +441,21 @@ public class Menu {
 	}
 	
 	public void drawSeeLocal() {
-		frame.getContentPane().removeAll();
+		String[] locais = new String[GereLocal.locais.size()];
 		
-		JList list = new JList(gereLocal.locais.toArray());
-		JScrollPane scrollpane = new JScrollPane();
-		JPanel panel = new JPanel();
-		panel.add(scrollpane);
-		scrollpane.getViewport().add(list);
-		JOptionPane.showMessageDialog(null, scrollpane, 
-		      "Please select an object", JOptionPane.PLAIN_MESSAGE);
+		for (int i = 0; i < GereLocal.locais.size(); i++) {
+			locais[i] = GereLocal.locais.get(i).getNome();
+		}
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(160,200,120,20);
-		
-		back.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawAdminMenu();
-			}
-		});
-		
-		frame.add(back);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(450,300);
-		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.repaint();
+		int count = locais.length;
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        String text = String.format("Existem %d locais", count);
+        JLabel label = new JLabel(text);
+        panel.add(label, BorderLayout.PAGE_START);
+        
+        JList<String> list = new JList<>(locais);
+        panel.add(list, BorderLayout.CENTER);
+        JOptionPane.showMessageDialog(null, panel, "Locais disponiveis", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void drawSearchLocal() {
@@ -484,6 +470,7 @@ public class Menu {
 
 		errorFrame.add(errorLabel);
 		errorFrame.setSize(100,100);
+		errorFrame.setLocationByPlatform(true);
 		errorFrame.setLayout(null);
 		errorFrame.setResizable(false);
 		errorFrame.setVisible(true);
