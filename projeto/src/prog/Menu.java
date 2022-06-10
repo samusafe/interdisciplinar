@@ -275,7 +275,13 @@ public class Menu {
 						pw += password.getPassword()[i];
 					}
 					
-					if (gereConta.entrarConta(name.getText(), pw) == ContaType.ADMIN) {
+					Conta conta = gereConta.entrarConta(name.getText(), pw);
+					if (conta == null) {
+						showError("Conta não existe");
+						return;
+					}
+					
+					if  (conta.getTipo() == ContaType.ADMIN) {
 						drawAdminMenu();
 					} else {
 						drawTuristaMenu();
@@ -426,12 +432,7 @@ public class Menu {
         JList<String> list = new JList<>(locais);
         panel.add(list, BorderLayout.CENTER);
         JOptionPane.showMessageDialog(null, panel, "Locais disponiveis", JOptionPane.INFORMATION_MESSAGE);
-        list.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(MouseEvent e) {
-                System.out.println("OK was clicked");
-
-            }
-        });
+        
 	}
 	
 	public void drawSearchLocal() {
@@ -446,7 +447,6 @@ public class Menu {
 
 		errorFrame.add(errorLabel);
 		errorFrame.setSize(100,100);
-		errorFrame.setLocationByPlatform(true);
 		errorFrame.setLayout(null);
 		errorFrame.setResizable(false);
 		errorFrame.setVisible(true);
