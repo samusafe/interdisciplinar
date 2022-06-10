@@ -22,10 +22,9 @@ public class GereConta {
 	
 	public Conta entrarConta(String nome, String password) {
 		for (int i = 0; i < contas.size(); i++) {
-			if (contas.get(i).getNome().equals(nome)
+			if (contas.get(i).getNome().equals(nome) 
 					&& contas.get(i).getPassword().equals(password)) {
-				ContaType tipo = contas.get(i).getTipo();
-				return contas.get(i);
+					return contas.get(i);
 			}
 		}
 		return null;
