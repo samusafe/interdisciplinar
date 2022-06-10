@@ -407,37 +407,7 @@ public class Menu {
 	}
 	
 	public void drawEditLocal() {
-		frame.getContentPane().removeAll();
-	    String bigList[] = new String[30];
-	    
-
-	    for (int i = 0; i < bigList.length; i++) {
-	      bigList[i] = Integer.toString(i);
-	    }
-	    
-	    String choice = (String) JOptionPane.showInputDialog(frame, "Escolhe o local", "Locais", JOptionPane.QUESTION_MESSAGE,
-	        null, bigList, "Titan");
-	    
-	    System.out.println(choice);
-
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(160,200,120,20);
-		
-		back.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawAdminMenu();
-			}
-		});
-		
-		frame.add(back);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(450,300);
-		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.repaint();
 	}
 	
 	public void drawSeeLocal() {
@@ -452,10 +422,16 @@ public class Menu {
         String text = String.format("Existem %d locais", count);
         JLabel label = new JLabel(text);
         panel.add(label, BorderLayout.PAGE_START);
-        
+
         JList<String> list = new JList<>(locais);
         panel.add(list, BorderLayout.CENTER);
         JOptionPane.showMessageDialog(null, panel, "Locais disponiveis", JOptionPane.INFORMATION_MESSAGE);
+        list.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+                System.out.println("OK was clicked");
+
+            }
+        });
 	}
 	
 	public void drawSearchLocal() {
