@@ -291,7 +291,6 @@ public class Menu {
 			}
 		});
 		
-
 		JButton back = new JButton("Voltar");
 		back.setBounds(160,200,120,20);
 		back.addActionListener(new ActionListener() {
