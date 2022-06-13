@@ -84,6 +84,10 @@ public class Local {
 		return media;
 	}
 	
+	public String toString() {
+		return nome;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
         if (o == this) {

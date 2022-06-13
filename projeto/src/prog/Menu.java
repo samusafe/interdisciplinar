@@ -5,8 +5,12 @@ import prog.Conta.ContaType;
 import prog.Local.LocalTipo;
 
 import java.awt.BorderLayout;
+import java.awt.Choice;
+import java.awt.FlowLayout;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.List;
 
 public class Menu {
 
@@ -416,22 +420,108 @@ public class Menu {
 	}
 	
 	public void drawSeeLocal() {
-		String[] locais = new String[GereLocal.locais.size()];
+		frame.getContentPane().removeAll();
 		
+		DefaultListModel<String> locaisList = new DefaultListModel<>();
+		locaisList.addElement("Museus");
+		locaisList.addElement("Monumentos");
+		
+		DefaultListModel<Local> museusList = new DefaultListModel<>();
 		for (int i = 0; i < GereLocal.locais.size(); i++) {
-			locais[i] = GereLocal.locais.get(i).getNome();
+			if (GereLocal.locais.get(i).getTipo().equals(LocalTipo.MUSEU)) {
+				museusList.addElement(GereLocal.locais.get(i));
+			}
+		}
+			
+		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
+		for (int i = 0; i < GereLocal.locais.size(); i++) {
+			if (GereLocal.locais.get(i).getTipo().equals(LocalTipo.MONUMENTO)) {
+				monumentosList.addElement(GereLocal.locais.get(i));
+			}
 		}
 		
-		int count = locais.length;
-        JPanel panel = new JPanel(new BorderLayout(10, 10));
-        String text = String.format("Existem %d locais", count);
-        JLabel label = new JLabel(text);
-        panel.add(label, BorderLayout.PAGE_START);
-
-        JList<String> list = new JList<>(locais);
-        panel.add(list, BorderLayout.CENTER);
-        JOptionPane.showMessageDialog(null, panel, "Locais disponiveis", JOptionPane.INFORMATION_MESSAGE);
-        
+		JList<String> list = new JList<>(locaisList);
+		list.setBounds(90, 80, 250, 100);
+		
+		JList<Local> list2 = new JList<>(museusList);
+		list2.setBounds(90, 80, 250, 100);
+		
+		JList<Local> list3 = new JList<>(monumentosList);
+		list3.setBounds(90, 80, 250, 100);
+		
+		JLabel label = new JLabel("Tipos de locais");
+		label.setBounds(90,30,200,50);
+		
+		JButton back = new JButton("Voltar");
+		back.setBounds(150,220,120,20);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawTuristaMenu();
+			}
+		});
+		
+		JButton btn = new JButton("OK");
+		btn.setBounds(150,200,120,20);
+		
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String msg = "";
+				
+				if (list.getSelectedIndex() == 0) {
+					frame.remove(list);
+					frame.remove(back);
+					msg = list.getSelectedValue();
+					label.setText(msg);
+					
+					JButton backIn = new JButton("Voltar");
+					backIn.setBounds(150,220,120,20);
+					
+					backIn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							drawSeeLocal();
+						}
+					});
+					
+					frame.add(list2);
+					frame.add(backIn);
+					frame.repaint();
+				}
+				
+				if (list.getSelectedIndex() == 1) {
+					frame.remove(list);
+					frame.remove(back);
+					msg = list.getSelectedValue();
+					label.setText(msg);
+					
+					JButton backIn = new JButton("Voltar");
+					backIn.setBounds(150,220,120,20);
+					
+					backIn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							drawSeeLocal();
+						}
+					});
+					
+					frame.add(list3);
+					frame.add(backIn);
+					frame.repaint();
+				}
+			}
+		});
+		
+		frame.add(label);
+		frame.add(btn);
+		frame.add(list);
+		frame.add(back);
+		frame.setSize(460,320);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
 	}
 	
 	public void drawSearchLocal() {
