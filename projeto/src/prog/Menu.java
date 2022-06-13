@@ -427,15 +427,12 @@ public class Menu {
 		locaisList.addElement("Monumentos");
 		
 		DefaultListModel<Local> museusList = new DefaultListModel<>();
-		for (int i = 0; i < GereLocal.locais.size(); i++) {
-			if (GereLocal.locais.get(i).getTipo().equals(LocalTipo.MUSEU)) {
-				museusList.addElement(GereLocal.locais.get(i));
-			}
-		}
-			
 		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
+		
 		for (int i = 0; i < GereLocal.locais.size(); i++) {
-			if (GereLocal.locais.get(i).getTipo().equals(LocalTipo.MONUMENTO)) {
+			if (GereLocal.locais.get(i).getTipo() == LocalTipo.MUSEU) {
+				museusList.addElement(GereLocal.locais.get(i));
+			} else {
 				monumentosList.addElement(GereLocal.locais.get(i));
 			}
 		}
@@ -483,7 +480,7 @@ public class Menu {
 						}
 					});
 					
-					frame.add(list2);
+					frame.add(list3);
 					frame.add(backIn);
 					frame.repaint();
 				}
@@ -503,7 +500,7 @@ public class Menu {
 						}
 					});
 					
-					frame.add(list3);
+					frame.add(list2);
 					frame.add(backIn);
 					frame.repaint();
 				}
