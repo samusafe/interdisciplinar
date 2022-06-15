@@ -1,5 +1,7 @@
 package prog;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import prog.Conta.ContaType;
 import prog.Local.LocalTipo;
@@ -373,9 +375,9 @@ public class Menu {
 				
 				LocalTipo tipo;
 				if (r1.isSelected()) {
-					tipo = LocalTipo.MONUMENTO;
-				} else {
 					tipo = LocalTipo.MUSEU;
+				} else {
+					tipo = LocalTipo.MONUMENTO;
 				}
 				
 				if (gereLocal.criarLocal(name.getText(), info.getText(), loc.getText(), tipo) == false) {
@@ -422,44 +424,16 @@ public class Menu {
 	public void drawSeeLocal() {
 		frame.getContentPane().removeAll();
 		
+		JLabel label = new JLabel("Tipos de locais");
+		label.setBounds(90,30,200,50);
+		
 		DefaultListModel<String> locaisList = new DefaultListModel<>();
-		DefaultListModel<Local> museusList = new DefaultListModel<>();
-		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
 		
 		locaisList.addElement("Museus");
 		locaisList.addElement("Monumentos");
 		
-		for (int i = 0; i < GereLocal.filterByType(LocalTipo.MUSEU).size(); i++) {
-			museusList.addElement(GereLocal.filterByType(LocalTipo.MUSEU).get(i));
-		}
-		
-		for (int i = 0; i < GereLocal.filterByType(LocalTipo.MONUMENTO).size(); i++) {
-			monumentosList.addElement(GereLocal.filterByType(LocalTipo.MONUMENTO).get(i));
-		}
-		
 		JList<String> list = new JList<>(locaisList);
 		list.setBounds(90, 80, 250, 100);
-		
-		JList<Local> list2 = new JList<>(museusList);
-		list2.setBounds(90, 80, 250, 100);
-		
-		JList<Local> list3 = new JList<>(monumentosList);
-		list3.setBounds(90, 80, 250, 100);
-		
-		JLabel label = new JLabel("Tipos de locais");
-		label.setBounds(90,30,200,50);
-		
-		JLabel labelEach = new JLabel("Informação sobre o local");
-		labelEach.setBounds(400,30,200,50);
-		
-		JLabel labelNome = new JLabel("Nome: ");
-		labelNome.setBounds(400,80,200,50);
-		
-		JLabel labelInfo = new JLabel("Info: ");
-		labelInfo.setBounds(400,100,200,50);
-		
-		JLabel labelLoc = new JLabel("Localizaçao: ");
-		labelLoc.setBounds(400,120,200,50);
 		
 		JButton back = new JButton("Voltar");
 		back.setBounds(150,220,120,20);
@@ -475,70 +449,16 @@ public class Menu {
 		
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				if (list.getSelectedIndex() == 0) {
-					frame.remove(list);
-					frame.remove(back);
-					frame.remove(btn);
-					label.setText(list.getSelectedValue());
-					JButton backIn = new JButton("Voltar");
-					backIn.setBounds(150,220,120,20);
-					
-					backIn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							drawSeeLocal();
-						}
-					});
-					
-					JButton btnIn = new JButton("OK");
-					btnIn.setBounds(150,200,120,20);
-					
-					btnIn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							if (list3.getSelectedIndex() != -1) {
-								labelNome.setText("Nome: " + GereLocal.filterByType(LocalTipo.MUSEU).get(list3.getSelectedIndex()).getNome());
-								labelInfo.setText("Info: " + GereLocal.filterByType(LocalTipo.MUSEU).get(list3.getSelectedIndex()).getInfo());
-								labelLoc.setText("Localizacao: " + GereLocal.filterByType(LocalTipo.MUSEU).get(list3.getSelectedIndex()).getLoc());
-								frame.add(labelNome);
-								frame.add(labelInfo);
-								frame.add(labelLoc);
-								frame.repaint();
-							} else {
-								showError("Escolha um local");
-								return;
-							}
-						}	
-					});
-					
-					frame.add(list3);
-					frame.add(labelEach);
-					frame.add(backIn);
-					frame.add(btnIn);
-					frame.setSize(820,320);
-					frame.repaint();
+					drawSeeLocalMuseus();
 				}
-				
 				if (list.getSelectedIndex() == 1) {
-					frame.remove(list);
-					frame.remove(back);
-					frame.remove(btn);
-					label.setText(list.getSelectedValue());
-					
-					JButton backIn = new JButton("Voltar");
-					backIn.setBounds(150,220,120,20);
-					
-					backIn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							drawSeeLocal();
-						}
-					});
-					
-					frame.add(list2);
-					frame.add(backIn);
-					frame.setSize(820,320);
-					frame.repaint();
+					drawSeeLocalMonumentos();
 				}
-			}
+				if (list.getSelectedIndex() == - 1) {
+					showError("Escolha um tipo de local");
+				}
+			}		
 		});
 		
 		frame.add(label);
@@ -546,6 +466,121 @@ public class Menu {
 		frame.add(list);
 		frame.add(back);
 		frame.setSize(460,320);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+	}
+	
+	public void drawSeeLocalMuseus() {
+		frame.getContentPane().removeAll();
+		
+		JLabel label = new JLabel("Museus");
+		label.setBounds(60,30,200,50);
+		
+		JLabel labelNome = new JLabel("Nome: ");
+		labelNome.setBounds(350,80,200,50);
+		
+		JLabel labelInfo = new JLabel("Info: ");
+		labelInfo.setBounds(350,100,200,50);
+		
+		JLabel labelLoc = new JLabel("Localizaçao: ");
+		labelLoc.setBounds(350,120,200,50);
+		
+		DefaultListModel<Local> museusList = new DefaultListModel<>();
+		
+		museusList.addAll(gereLocal.filterByType(LocalTipo.MUSEU));
+		
+		JList<Local> listMuseus = new JList<>(museusList);
+		listMuseus.setBounds(60, 80, 250, 100);
+		
+		listMuseus.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (listMuseus.getSelectedIndex() != -1) {
+					labelNome.setText("Nome: " + museusList.get(listMuseus.getSelectedIndex()).getNome());
+					labelInfo.setText("Info: " + museusList.get(listMuseus.getSelectedIndex()).getInfo());
+					labelLoc.setText("Localizacao: " + museusList.get(listMuseus.getSelectedIndex()).getLoc());
+					frame.add(labelNome);
+					frame.add(labelInfo);
+					frame.add(labelLoc);
+					frame.repaint();
+				}
+			}
+		});
+		
+		JButton back = new JButton("Voltar");
+		back.setBounds(260,220,120,20);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawSeeLocal();
+			}
+		});
+		
+		frame.add(label);
+		frame.add(listMuseus);
+		frame.add(back);
+		frame.setSize(640,320);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+	}
+	
+	public void drawSeeLocalMonumentos() {
+		frame.getContentPane().removeAll();
+		
+		JLabel label = new JLabel("Monumentos");
+		label.setBounds(60,30,200,50);
+		
+		JLabel labelNome = new JLabel("Nome: ");
+		labelNome.setBounds(350,80,200,50);
+		
+		JLabel labelInfo = new JLabel("Info: ");
+		labelInfo.setBounds(350,100,200,50);
+		
+		JLabel labelLoc = new JLabel("Localizaçao: ");
+		labelLoc.setBounds(350,120,200,50);
+		
+		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
+		monumentosList.addAll(gereLocal.filterByType(LocalTipo.MONUMENTO));
+		
+		JList<Local> listMonumentos = new JList<>(monumentosList);
+		listMonumentos.setBounds(60, 80, 250, 100);
+		
+		listMonumentos.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (listMonumentos.getSelectedIndex() != -1) {
+					labelNome.setText("Nome: " + monumentosList.get(listMonumentos.getSelectedIndex()).getNome());
+					labelInfo.setText("Info: " + monumentosList.get(listMonumentos.getSelectedIndex()).getInfo());
+					labelLoc.setText("Localizacao: " + monumentosList.get(listMonumentos.getSelectedIndex()).getLoc());
+					frame.add(labelNome);
+					frame.add(labelInfo);
+					frame.add(labelLoc);
+					frame.repaint();
+				}
+			}
+		});
+		
+		JButton back = new JButton("Voltar");
+		back.setBounds(260,220,120,20);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawSeeLocal();
+			}
+		});
+		
+		frame.add(label);
+		frame.add(listMonumentos);
+		frame.add(back);
+		frame.setSize(640,320);
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
