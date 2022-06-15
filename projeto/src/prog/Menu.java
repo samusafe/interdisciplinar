@@ -166,8 +166,6 @@ public class Menu {
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
-		
-		
 	}
 	
 	public void drawLoginAccount() {
@@ -259,7 +257,6 @@ public class Menu {
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
-		
 	}
 	
 	public void drawAdminMenu() {
@@ -290,8 +287,19 @@ public class Menu {
 			}
 		});
 		
+		JButton atividade = new JButton("Atividade");
+		atividade.setBounds(40,160,120,20);
+		atividade.setBackground(Color.WHITE);
+		atividade.setFont(new Font("Arial", Font.BOLD, 14));
+		atividade.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				drawActivity();
+			}
+		});
+		
 		JButton back = new JButton("<<<");
-		back.setBounds(250,20,70,20);
+		back.setBounds(20,20,70,20);
 		back.setBackground(Color.WHITE);
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
@@ -302,6 +310,7 @@ public class Menu {
 		
 		frame.add(edit);
 		frame.add(criar);
+		frame.add(atividade);
 		frame.add(back);
 		frame.add(imagem);
 		frame.setSize(360,600);
@@ -321,7 +330,7 @@ public class Menu {
 		imagem.setBounds(0, 0, 360, 600);
 		
 		JButton ver = new JButton("Ver locais");
-		ver.setBounds(15,200,120,20);
+		ver.setBounds(40,80,120,20);
 		ver.setBackground(Color.WHITE);
 		ver.setFont(new Font("Arial", Font.BOLD, 14));
 		ver.addActionListener(new ActionListener() {
@@ -332,7 +341,7 @@ public class Menu {
 		});
 		
 		JButton pesquisar = new JButton("Pesquisar local");
-		pesquisar.setBounds(140,200,120,20);
+		pesquisar.setBounds(40,120,160,20);
 		pesquisar.setBackground(Color.WHITE);
 		pesquisar.setFont(new Font("Arial", Font.BOLD, 14));
 		pesquisar.addActionListener(new ActionListener() {
@@ -343,7 +352,7 @@ public class Menu {
 		});
 		
 		JButton back = new JButton("<<<");
-		back.setBounds(250,20,70,20);
+		back.setBounds(20,20,70,20);
 		back.setBackground(Color.WHITE);
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
@@ -458,10 +467,9 @@ public class Menu {
 		});
 		
 		JButton back = new JButton("<<<");
-		back.setBounds(250,20,70,20);
+		back.setBounds(20,20,70,20);
 		back.setBackground(Color.WHITE);
 		back.setFont(new Font("Arial", Font.BOLD, 14));
-		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawAdminMenu();
@@ -489,7 +497,285 @@ public class Menu {
 	}
 	
 	public void drawEditLocal() {
+		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		JLabel label = new JLabel("Tipos de locais");
+		label.setBounds(50,60,200,50);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		DefaultListModel<String> locaisList = new DefaultListModel<>();
+		
+		locaisList.addElement("Museus");
+		locaisList.addElement("Monumentos");
+		
+		JList<String> list = new JList<>(locaisList);
+		list.setBounds(40, 120, 250, 100);
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(20,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawAdminMenu();
+			}
+		});
+		
+		JButton ok = new JButton("Continuar");
+		ok.setBounds(200,500,120,20);
+		ok.setBackground(Color.WHITE);
+		ok.setFont(new Font("Arial", Font.BOLD, 14));
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (list.getSelectedIndex() == - 1) {
+					showError("Escolha um tipo de local");
+				}
+				LocalTipo tipo;
+				if (list.getSelectedIndex() == 0) {
+					tipo = LocalTipo.MUSEU;
+				} else { 
+					tipo = LocalTipo.MONUMENTO;
+				}
+				drawEditLocalDetail(tipo);
+			}		
+		});
+		
+		frame.add(label);
+		frame.add(ok);
+		frame.add(list);
+		frame.add(back);
+		frame.add(imagem);
+		frame.setSize(360,600);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+	}
+	
+	public void drawEditLocalDetail(LocalTipo tipo) {
+		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		String nome;
+		if (tipo == LocalTipo.MUSEU) {
+			nome = "Museus";
+		} else {
+			nome = "Monumentos";
+		}
+		
+		JLabel label = new JLabel(nome);
+		label.setBounds(50,70,200,50);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JLabel labelNome = new JLabel("");
+		labelNome.setBounds(50,260,550,30);
+		labelNome.setForeground(Color.WHITE);
+		labelNome.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JLabel labelInfo = new JLabel("");
+		labelInfo.setBounds(50,280,550,30);
+		labelInfo.setForeground(Color.WHITE);
+		labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JLabel labelLoc = new JLabel("");
+		labelLoc.setBounds(50,300,550,30);
+		labelLoc.setForeground(Color.WHITE);
+		labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		DefaultListModel<Local> localList = new DefaultListModel<>();
+		
+		localList.addAll(gereLocal.filterByType(tipo));
+		
+		JList<Local> listLocal = new JList<>(localList);
+		listLocal.setLayoutOrientation(JList.VERTICAL);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(40, 120, 250, 120);
+		scrollPane.setViewportView(listLocal);
+		
+		listLocal.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				labelNome.setText("Nome: " + localList.get(listLocal.getSelectedIndex()).getNome());
+				labelInfo.setText("Info: " + localList.get(listLocal.getSelectedIndex()).getInfo());
+				labelLoc.setText("Localizacao: " + localList.get(listLocal.getSelectedIndex()).getLoc());
+			}
+		});
+		
+		JButton editNome = new JButton("Alterar nome");
+		editNome.setBounds(20,340,140,20);
+		editNome.setBackground(Color.WHITE);
+		editNome.setFont(new Font("Arial", Font.BOLD, 14));
+		editNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tipo = "nome";
+				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo);
+			}
+		});
+		
+		JButton editInfo = new JButton("Alterar info");
+		editInfo.setBounds(180,340,140,20);
+		editInfo.setBackground(Color.WHITE);
+		editInfo.setFont(new Font("Arial", Font.BOLD, 14));
+		editInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tipo = "info";
+				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo);
+			}
+		});
+		
+		JButton editLoc = new JButton("Alterar loc");
+		editLoc.setBounds(110,370,140,20);
+		editLoc.setBackground(Color.WHITE);
+		editLoc.setFont(new Font("Arial", Font.BOLD, 14));
+		editLoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tipo = "localizacao";
+				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo);
+			}
+		});
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(20,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawEditLocal();
+			}
+		});
+		
+		frame.add(scrollPane);
+		frame.add(label);
+		frame.add(back);
+		frame.add(labelNome);
+		frame.add(labelInfo);
+		frame.add(labelLoc);
+		frame.add(editNome);
+		frame.add(editInfo);
+		frame.add(editLoc);
+		frame.add(imagem);
+		frame.setSize(360,600);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+	}
+	
+	public void drawEdit(Local local, String tipo) {
+		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		JLabel newLabel = new JLabel("Editar " + tipo);
+		newLabel.setBounds(60,120,160,30);
+		newLabel.setForeground(Color.WHITE);
+		newLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JTextField novo = new JTextField("");
+		novo.setBounds(60,150,200,30);
+		
+		JButton ok = new JButton("Continuar");
+		ok.setBounds(200,500,120,20);
+		ok.setBackground(Color.WHITE);
+		ok.setFont(new Font("Arial", Font.BOLD, 14));
+		ok.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				if (novo.getText().equals("")) {
+					showError("Insira " + tipo);
+					return;
+				}
+				if (tipo == "nome") {
+					local.setNome(novo.getText());
+					drawEditLocal();
+				}
+				if (tipo == "info") {
+					local.setInfo(novo.getText());
+					drawEditLocal();
+				}
+				if (tipo == "localizacao") {
+					local.setLoc(novo.getText());
+					drawEditLocal();
+				}
+			}
+		});
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(80,500,120,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawEditLocal();
+			}
+		});
+		
+		frame.add(ok);
+		frame.add(back);
+		frame.add(newLabel);
+		frame.add(novo);
+		frame.add(imagem);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setSize(360,600);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+	}
+	
+	public void drawActivity() {
+		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		JLabel label = new JLabel("Atividade");
+		label.setBounds(50,60,200,50);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		DefaultListModel<Avaliacao> activityList = new DefaultListModel<>();	
+		
+		JList<Avaliacao> list = new JList<>(activityList);
+		list.setBounds(40, 120, 250, 100);
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(20,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawAdminMenu();
+			}
+		});
+		
+		frame.add(label);
+		frame.add(list);
+		frame.add(back);
+		frame.add(imagem);
+		frame.setSize(360,600);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
 	}
 	
 	public void drawSeeLocal() {
@@ -512,10 +798,9 @@ public class Menu {
 		list.setBounds(40, 120, 250, 100);
 		
 		JButton back = new JButton("<<<");
-		back.setBounds(250,20,70,20);
+		back.setBounds(20,20,70,20);
 		back.setBackground(Color.WHITE);
 		back.setFont(new Font("Arial", Font.BOLD, 14));
-		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawTuristaMenu();
@@ -526,7 +811,6 @@ public class Menu {
 		ok.setBounds(200,500,120,20);
 		ok.setBackground(Color.WHITE);
 		ok.setFont(new Font("Arial", Font.BOLD, 14));
-		
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedIndex() == - 1) {
@@ -571,34 +855,35 @@ public class Menu {
 		}
 		
 		JLabel label = new JLabel(nome);
-		label.setBounds(50,60,200,50);
+		label.setBounds(50,70,200,50);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JLabel labelNome = new JLabel("");
-		labelNome.setBounds(60,240,60,30);
+		labelNome.setBounds(50,260,550,30);
 		labelNome.setForeground(Color.WHITE);
 		labelNome.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JLabel labelInfo = new JLabel("");
-		labelInfo.setBounds(50,240,200,550);
+		labelInfo.setBounds(50,280,550,30);
 		labelInfo.setForeground(Color.WHITE);
 		labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JLabel labelLoc = new JLabel("");
-		labelLoc.setBounds(50,280,200,550);
+		labelLoc.setBounds(50,300,550,30);
 		labelLoc.setForeground(Color.WHITE);
 		labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		DefaultListModel<Local> localList = new DefaultListModel<>();
 		
-		localList.addAll(gereLocal.filterByType(tipo));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(40, 120, 250, 120);
+		localList.addAll(gereLocal.filterByType(tipo));	
 		
 		JList<Local> listLocal = new JList<>(localList);
 		listLocal.setLayoutOrientation(JList.VERTICAL);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(40, 120, 250, 120);
+		scrollPane.setViewportView(listLocal);
 		
 		listLocal.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -609,17 +894,15 @@ public class Menu {
 		});
 		
 		JButton back = new JButton("<<<");
-		back.setBounds(250,20,70,20);
+		back.setBounds(20,20,70,20);
 		back.setBackground(Color.WHITE);
 		back.setFont(new Font("Arial", Font.BOLD, 14));
-		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawSeeLocal();
 			}
 		});
 		
-		scrollPane.setViewportView(listLocal);
 		frame.add(scrollPane);
 		frame.add(label);
 		frame.add(back);
@@ -638,7 +921,88 @@ public class Menu {
 	}
 	
 	public void drawSearchLocal() {
-		System.out.println("procurar local");
+		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		JLabel nameLabel = new JLabel("Nome do local");
+		nameLabel.setBounds(60,60,150,30);
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JTextField name = new JTextField("");
+		name.setBounds(60,90,200,30);
+		
+		JLabel labelNome = new JLabel("");
+		labelNome.setBounds(50,260,550,30);
+		labelNome.setForeground(Color.WHITE);
+		labelNome.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JLabel labelInfo = new JLabel("");
+		labelInfo.setBounds(50,280,550,30);
+		labelInfo.setForeground(Color.WHITE);
+		labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JLabel labelLoc = new JLabel("");
+		labelLoc.setBounds(50,300,550,30);
+		labelLoc.setForeground(Color.WHITE);
+		labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		JButton ok = new JButton("Pesquisar");
+		ok.setBounds(140,140,120,20);
+		ok.setBackground(Color.WHITE);
+		ok.setFont(new Font("Arial", Font.BOLD, 14));
+		ok.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				if (name.getText().equals("")) {
+					showError("Insira nome");
+					return;
+				}
+				
+				if (GereLocal.locais.size() == 0) {
+					showError("Nenhum local criado");
+					return;
+				}
+				else {
+					for (int i = 0; i < GereLocal.locais.size(); i++) {
+						if (name.getText().equals(GereLocal.locais.get(i).getNome())) {
+							int j = i;
+							labelNome.setText("Nome: " + GereLocal.locais.get(j).getNome());
+							labelInfo.setText("Info: " + GereLocal.locais.get(j).getInfo());
+							labelLoc.setText("Localizacao: " + GereLocal.locais.get(j).getLoc());
+						}
+					}
+				}
+			}
+		});
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(20,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawTuristaMenu();
+			}
+		});
+		
+		frame.add(ok);
+		frame.add(back);
+		frame.add(nameLabel);
+		frame.add(labelNome);
+		frame.add(labelInfo);
+		frame.add(labelLoc);
+		frame.add(name);
+		frame.add(imagem);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setSize(360,600);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
 	}
 	
 	public void showError(String error) {
