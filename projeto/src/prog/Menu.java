@@ -86,15 +86,13 @@ public class Menu {
 		
 		JRadioButton r1=new JRadioButton("Turista"); 
 		r1.setBounds(60,270,100,30);
-		r1.setOpaque(false);
+		r1.setOpaque(true);
 		r1.setContentAreaFilled(false);
 		r1.setBorderPainted(false);
 		r1.setFont(new Font("Arial", Font.BOLD, 16));
 		r1.setForeground(Color.WHITE);
-		r1.setDisabledSelectedIcon(notSelectedImage);
-		r1.setSelectedIcon(selectedImage);
 		
-		JRadioButton r2=new JRadioButton("Admin");   
+		JRadioButton r2=new JRadioButton("Admin");  
 		r2.setBounds(180,270,100,30);
 		r2.setOpaque(false);
 		r2.setContentAreaFilled(false);
@@ -454,8 +452,8 @@ public class Menu {
 					showError("Ja existe um local com essas informacoes");
 					return;
 				}
-				
 				showError("Local criado");
+				drawAdminMenu();
 			}
 		});
 		
@@ -531,15 +529,16 @@ public class Menu {
 		
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (list.getSelectedIndex() == 0) {
-					drawSeeLocalMuseus();
-				}
-				if (list.getSelectedIndex() == 1) {
-					drawSeeLocalMonumentos();
-				}
 				if (list.getSelectedIndex() == - 1) {
 					showError("Escolha um tipo de local");
 				}
+				LocalTipo tipo;
+				if (list.getSelectedIndex() == 0) {
+					tipo = LocalTipo.MUSEU;
+				} else { 
+					tipo = LocalTipo.MONUMENTO;
+				}
+				drawSeeLocalDetail(tipo);
 			}		
 		});
 		
@@ -558,45 +557,54 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawSeeLocalMuseus() {
+	public void drawSeeLocalDetail(LocalTipo tipo) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
 		imagem.setBounds(0, 0, 360, 600);
 		
-		JLabel label = new JLabel("Museus");
+		String nome;
+		if (tipo == LocalTipo.MUSEU) {
+			nome = "Museus";
+		} else {
+			nome = "Monumentos";
+		}
+		
+		JLabel label = new JLabel(nome);
 		label.setBounds(50,60,200,50);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		DefaultListModel<Local> museusList = new DefaultListModel<>();
+		JLabel labelNome = new JLabel("");
+		labelNome.setBounds(60,240,60,30);
+		labelNome.setForeground(Color.WHITE);
+		labelNome.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		museusList.addAll(gereLocal.filterByType(LocalTipo.MUSEU));
+		JLabel labelInfo = new JLabel("");
+		labelInfo.setBounds(50,240,200,550);
+		labelInfo.setForeground(Color.WHITE);
+		labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		JList<Local> listMuseus = new JList<>(museusList);
-		listMuseus.setBounds(40, 120, 250, 100);
+		JLabel labelLoc = new JLabel("");
+		labelLoc.setBounds(50,280,200,550);
+		labelLoc.setForeground(Color.WHITE);
+		labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		listMuseus.addListSelectionListener(new ListSelectionListener() {
+		DefaultListModel<Local> localList = new DefaultListModel<>();
+		
+		localList.addAll(gereLocal.filterByType(tipo));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(40, 120, 250, 120);
+		
+		JList<Local> listLocal = new JList<>(localList);
+		listLocal.setLayoutOrientation(JList.VERTICAL);
+		
+		listLocal.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				JLabel labelNome = new JLabel("Nome: " + museusList.get(listMuseus.getSelectedIndex()).getNome());
-				labelNome.setBounds(60,240,60,30);
-				labelNome.setForeground(Color.WHITE);
-				labelNome.setFont(new Font("Arial", Font.BOLD, 16));
-				
-				JLabel labelInfo = new JLabel("Info: " + museusList.get(listMuseus.getSelectedIndex()).getInfo());
-				labelInfo.setBounds(50,240,200,550);
-				labelInfo.setForeground(Color.WHITE);
-				labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
-				
-				JLabel labelLoc = new JLabel("Localizacao: " + museusList.get(listMuseus.getSelectedIndex()).getLoc());
-				labelLoc.setBounds(50,280,200,550);
-				labelLoc.setForeground(Color.WHITE);
-				labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
-				
-				frame.add(labelNome);
-				frame.add(labelInfo);
-				frame.add(labelLoc);
-				frame.repaint();
+				labelNome.setText("Nome: " + localList.get(listLocal.getSelectedIndex()).getNome());
+				labelInfo.setText("Info: " + localList.get(listLocal.getSelectedIndex()).getInfo());
+				labelLoc.setText("Localizacao: " + localList.get(listLocal.getSelectedIndex()).getLoc());
 			}
 		});
 		
@@ -611,75 +619,13 @@ public class Menu {
 			}
 		});
 		
+		scrollPane.setViewportView(listLocal);
+		frame.add(scrollPane);
 		frame.add(label);
-		frame.add(listMuseus);
 		frame.add(back);
-		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.repaint();
-	}
-	
-	public void drawSeeLocalMonumentos() {
-		frame.getContentPane().removeAll();
-		
-		JLabel imagem = new JLabel(backgroundImage);
-		imagem.setBounds(0, 0, 360, 600);
-		
-		JLabel label = new JLabel("Monumentos");
-		label.setBounds(50,60,200,50);
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Arial", Font.BOLD, 16));
-		
-		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
-		monumentosList.addAll(gereLocal.filterByType(LocalTipo.MONUMENTO));
-		
-		JList<Local> listMonumentos = new JList<>(monumentosList);
-		listMonumentos.setBounds(40, 120, 250, 100);
-		
-		listMonumentos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				JLabel labelNome = new JLabel("Nome: " + monumentosList.get(listMonumentos.getSelectedIndex()).getNome());
-				labelNome.setBounds(60,240,60,30);
-				labelNome.setForeground(Color.WHITE);
-				labelNome.setFont(new Font("Arial", Font.BOLD, 16));
-				
-				JLabel labelInfo = new JLabel("Info: " + monumentosList.get(listMonumentos.getSelectedIndex()).getInfo());
-				labelInfo.setBounds(50,240,200,550);
-				labelInfo.setForeground(Color.WHITE);
-				labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
-				
-				JLabel labelLoc = new JLabel("Localizacao: " + monumentosList.get(listMonumentos.getSelectedIndex()).getLoc());
-				labelLoc.setBounds(50,280,200,550);
-				labelLoc.setForeground(Color.WHITE);
-				labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
-				
-				frame.add(labelNome);
-				frame.add(labelInfo);
-				frame.add(labelLoc);
-				frame.repaint();
-			}
-		});
-		
-		JButton back = new JButton("<<<");
-		back.setBounds(250,20,70,20);
-		back.setBackground(Color.WHITE);
-		back.setFont(new Font("Arial", Font.BOLD, 14));
-		
-		back.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawSeeLocal();
-			}
-		});
-		
-		frame.add(label);
-		frame.add(listMonumentos);
-		frame.add(back);
+		frame.add(labelNome);
+		frame.add(labelInfo);
+		frame.add(labelLoc);
 		frame.add(imagem);
 		frame.setSize(360,600);
 		frame.setLayout(null);

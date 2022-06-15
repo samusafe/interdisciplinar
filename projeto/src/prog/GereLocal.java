@@ -7,6 +7,22 @@ import java.util.ArrayList;
 
 public class GereLocal {
 	public static ArrayList<Local> locais = new ArrayList<>();
+	
+	public GereLocal() {
+		locais.add(new Local("museu 1", "info 1", "loc 1", LocalTipo.MUSEU));
+		locais.add(new Local("museu 2", "info 2", "loc 2", LocalTipo.MUSEU));
+		locais.add(new Local("museu 3", "info 3", "loc 3", LocalTipo.MUSEU));
+		locais.add(new Local("museu 3", "info 3", "loc 3", LocalTipo.MUSEU));
+		locais.add(new Local("museu 3", "info 3", "loc 3", LocalTipo.MUSEU));
+		locais.add(new Local("museu 3", "info 3", "loc 3", LocalTipo.MUSEU));
+		locais.add(new Local("museu 3", "info 3", "loc 3", LocalTipo.MUSEU));
+		locais.add(new Local("museu 3", "info 3", "loc 3", LocalTipo.MUSEU));
+		
+		locais.add(new Local("monumento 1", "info 1", "loc 1", LocalTipo.MONUMENTO));
+		locais.add(new Local("monumento 2", "info 2", "loc 2", LocalTipo.MONUMENTO));
+		locais.add(new Local("monumento 3", "info 3", "loc 3", LocalTipo.MONUMENTO));
+	}
+	
 	public boolean criarLocal(String nome, String info, String loc, LocalTipo tipo) {
 		Local local = new Local(nome, info, loc, tipo);
 		for (int i = 0; i < locais.size(); i++) {

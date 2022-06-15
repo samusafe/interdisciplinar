@@ -6,6 +6,12 @@ import java.util.ArrayList;
 
 public class GereConta {
 	static ArrayList<Conta> contas = new ArrayList<>();
+	
+	public GereConta() {
+		contas.add(new Conta("admin", "admin", ContaType.ADMIN));
+		contas.add(new Conta("user", "user", ContaType.TURISTA));
+	}
+	
 	public boolean criarConta(String nome, char[] password, ContaType tipo) {
 		String pw = "";
 		for (int i = 0; i < password.length; i++) {
