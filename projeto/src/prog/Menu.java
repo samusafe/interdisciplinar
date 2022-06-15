@@ -6,28 +6,30 @@ import javax.swing.event.ListSelectionListener;
 import prog.Conta.ContaType;
 import prog.Local.LocalTipo;
 
-import java.awt.BorderLayout;
-import java.awt.Choice;
-import java.awt.FlowLayout;
-import java.awt.TextArea;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.*;
-import java.util.List;
 
 public class Menu {
 
 	private JFrame frame = new JFrame("Projeto");
 	private GereConta gereConta = new GereConta();
 	private GereLocal gereLocal = new GereLocal();
+	private ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/img/background.jpeg"));
+	private ImageIcon notSelectedImage = new ImageIcon(getClass().getResource("/img/not_selected.png"));
+	private ImageIcon selectedImage = new ImageIcon(getClass().getResource("/img/selected.png"));
 	
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
 		
-		JLabel imagem = new JLabel(new ImageIcon(getClass().getResource("/img/Beautiful_Sunrise_with_Sun_Background-450.jpg")));
-		imagem.setBounds(0, 0, 300,300);
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
 		
 		JButton criar = new JButton("Criar conta");
-		criar.setBounds(15,200,120,20);
+		criar.setBounds(30,450,120,20);
+		criar.setBackground(Color.WHITE);
+		criar.setFont(new Font("Arial", Font.BOLD, 14));
 		criar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -36,7 +38,9 @@ public class Menu {
 		});
 		
 		JButton login = new JButton("Entrar conta");
-		login.setBounds(140,200,120,20);
+		login.setBounds(180,450,120,20);
+		login.setBackground(Color.WHITE);
+		login.setFont(new Font("Arial", Font.BOLD, 14));
 		login.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -47,7 +51,7 @@ public class Menu {
 		frame.add(login);
 		frame.add(criar);
 		frame.add(imagem);
-		frame.setSize(300,300);
+		frame.setSize(360,600);
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -56,128 +60,54 @@ public class Menu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
-	
-	public void drawAdminMenu() {
-		frame.getContentPane().removeAll();
-		
-		JLabel imagem = new JLabel(new ImageIcon(getClass().getResource("/img/Beautiful_Sunrise_with_Sun_Background-450.jpg")));
-		imagem.setBounds(0, 0, 300,300);
-		
-		JButton criar = new JButton("Criar local");
-		criar.setBounds(15,200,120,20);
-		criar.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				drawCreateLocal();
-			}
-		});
-		
-		JButton edit = new JButton("Editar locais");
-		edit.setBounds(140,200,120,20);
-		edit.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				drawEditLocal ();
-			}
-		});
-		
-		JButton back = new JButton("Voltar");
-		back.setBounds(180,20,70,20);
-		back.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawMainMenu();
-			}
-		});
-		
-		frame.add(edit);
-		frame.add(criar);
-		frame.add(back);
-		frame.add(imagem);
-		frame.setSize(300,300);
-		frame.setLayout(null);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.repaint();
-	}
-	
-	public void drawTuristaMenu() {
-		frame.getContentPane().removeAll();
-		
-		JLabel imagem = new JLabel(new ImageIcon(getClass().getResource("/img/Beautiful_Sunrise_with_Sun_Background-450.jpg")));
-		imagem.setBounds(0, 0, 300,300);
-		
-		JButton criar = new JButton("Ver locais");
-		criar.setBounds(15,200,120,20);
-		criar.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				drawSeeLocal();
-			}
-		});
-		
-		JButton edit = new JButton("Pesquisar local");
-		edit.setBounds(140,200,120,20);
-		edit.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				drawSearchLocal ();
-			}
-		});
-		
-		JButton back = new JButton("Voltar");
-		back.setBounds(180,20,70,20);
-		back.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawMainMenu();
-			}
-		});
-		
-		frame.add(edit);
-		frame.add(criar);
-		frame.add(back);
-		frame.add(imagem);
-		frame.setSize(300,300);
-		frame.setLayout(null);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.repaint();
-		
-	}
-	
 	
 	public void drawCreateAccount() {
 		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
 		JLabel nameLabel = new JLabel("Nome");
-		nameLabel.setBounds(75,30,60,30);
+		nameLabel.setBounds(60,70,60,30);
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JTextField name = new JTextField("");
-		name.setBounds(150,30,200,30);
+		name.setBounds(60,100,200,30);
 		
 		JLabel passLabel = new JLabel("Password");
-		passLabel.setBounds(60,70,60,30);
+		passLabel.setBounds(60,140,100,30);
+		passLabel.setForeground(Color.WHITE);
+		passLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JPasswordField password = new JPasswordField("");
-		password.setBounds(150,70,200,30);
+		password.setBounds(60,170,200,30);
 		password.setEchoChar('*');
 		
-		JRadioButton r1=new JRadioButton("Turista");    
+		JRadioButton r1=new JRadioButton("Turista"); 
+		r1.setBounds(60,270,100,30);
+		r1.setOpaque(false);
+		r1.setContentAreaFilled(false);
+		r1.setBorderPainted(false);
+		r1.setFont(new Font("Arial", Font.BOLD, 16));
+		r1.setForeground(Color.WHITE);
+		r1.setDisabledSelectedIcon(notSelectedImage);
+		r1.setSelectedIcon(selectedImage);
+		
 		JRadioButton r2=new JRadioButton("Admin");   
-		r1.setBounds(90,140,100,30);
-		r2.setBounds(240,140,100,30);
+		r2.setBounds(180,270,100,30);
+		r2.setOpaque(false);
+		r2.setContentAreaFilled(false);
+		r2.setBorderPainted(false);
+		r2.setFont(new Font("Arial", Font.BOLD, 16));
+		r2.setForeground(Color.WHITE);
 		
 		ButtonGroup bg = new ButtonGroup();    
 		bg.add(r1);
 		bg.add(r2);  
 		
 		JButton ok = new JButton("Continuar");
-		ok.setBounds(280,200,120,20);
+		ok.setBounds(200,500,120,20);
 		ok.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -214,8 +144,8 @@ public class Menu {
 			}
 		});
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(160,200,120,20);
+		JButton back = new JButton("<<<");
+		back.setBounds(80,500,120,20);
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawMainMenu();
@@ -230,9 +160,10 @@ public class Menu {
 		frame.add(password);
 		frame.add(r1);
 		frame.add(r2);
+		frame.add(imagem);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		frame.setSize(450,300);
+		frame.setSize(360,600);
 		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -244,21 +175,30 @@ public class Menu {
 	public void drawLoginAccount() {
 		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
 		JLabel nameLabel = new JLabel("Nome");
-		nameLabel.setBounds(75,30,60,30);
+		nameLabel.setBounds(60,120,60,30);
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JTextField name = new JTextField("");
-		name.setBounds(150,30,200,30);
+		name.setBounds(60,150,200,30);
 		
 		JLabel passLabel = new JLabel("Password");
-		passLabel.setBounds(60,70,60,30);
+		passLabel.setBounds(60,200,140,30);
+		passLabel.setForeground(Color.WHITE);
+		passLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JPasswordField password = new JPasswordField("");
-		password.setBounds(150,70,200,30);
+		password.setBounds(60,230,200,30);
 		password.setEchoChar('*');
 		
 		JButton ok = new JButton("Continuar");
-		ok.setBounds(280,200,120,20);
+		ok.setBounds(200,500,120,20);
+		ok.setBackground(Color.WHITE);
+		ok.setFont(new Font("Arial", Font.BOLD, 14));
 		ok.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -297,8 +237,10 @@ public class Menu {
 			}
 		});
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(160,200,120,20);
+		JButton back = new JButton("<<<");
+		back.setBounds(80,500,120,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawMainMenu();
@@ -311,9 +253,115 @@ public class Menu {
 		frame.add(name);
 		frame.add(passLabel);
 		frame.add(password);
+		frame.add(imagem);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		frame.setSize(450,300);
+		frame.setSize(360,600);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+		
+	}
+	
+	public void drawAdminMenu() {
+		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		JButton criar = new JButton("Criar local");
+		criar.setBounds(40,80,120,20);
+		criar.setBackground(Color.WHITE);
+		criar.setFont(new Font("Arial", Font.BOLD, 14));
+		criar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				drawCreateLocal();
+			}
+		});
+		
+		JButton edit = new JButton("Editar locais");
+		edit.setBounds(40,120,120,20);
+		edit.setBackground(Color.WHITE);
+		edit.setFont(new Font("Arial", Font.BOLD, 14));
+		edit.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				drawEditLocal ();
+			}
+		});
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(250,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawMainMenu();
+			}
+		});
+		
+		frame.add(edit);
+		frame.add(criar);
+		frame.add(back);
+		frame.add(imagem);
+		frame.setSize(360,600);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle("Projeto");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.repaint();
+	}
+	
+	public void drawTuristaMenu() {
+		frame.getContentPane().removeAll();
+		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
+		JButton ver = new JButton("Ver locais");
+		ver.setBounds(15,200,120,20);
+		ver.setBackground(Color.WHITE);
+		ver.setFont(new Font("Arial", Font.BOLD, 14));
+		ver.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				drawSeeLocal();
+			}
+		});
+		
+		JButton pesquisar = new JButton("Pesquisar local");
+		pesquisar.setBounds(140,200,120,20);
+		pesquisar.setBackground(Color.WHITE);
+		pesquisar.setFont(new Font("Arial", Font.BOLD, 14));
+		pesquisar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				drawSearchLocal ();
+			}
+		});
+		
+		JButton back = new JButton("<<<");
+		back.setBounds(250,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawMainMenu();
+			}
+		});
+		
+		frame.add(pesquisar);
+		frame.add(ver);
+		frame.add(back);
+		frame.add(imagem);
+		frame.setSize(360,600);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -324,35 +372,57 @@ public class Menu {
 	public void drawCreateLocal() {
 		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
 		JLabel nameLabel = new JLabel("Nome");
-		nameLabel.setBounds(75,30,60,30);
+		nameLabel.setBounds(60,70,60,30);
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JTextField name = new JTextField("");
-		name.setBounds(150,30,200,30);
+		name.setBounds(60,100,200,30);
 		
 		JLabel infoLabel = new JLabel("Info");
-		infoLabel.setBounds(80,70,60,30);
+		infoLabel.setBounds(60,150,60,30);
+		infoLabel.setForeground(Color.WHITE);
+		infoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JTextField info = new JTextField("");
-		info.setBounds(150,70,200,30);
+		info.setBounds(60,180,200,30);
 		
 		JLabel locLabel = new JLabel("Localizacao");
-		locLabel.setBounds(50,110,80,30);
+		locLabel.setBounds(60,230,120,30);
+		locLabel.setForeground(Color.WHITE);
+		locLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JTextField loc = new JTextField("");
-		loc.setBounds(150,110,200,30);
+		loc.setBounds(60,260,200,30);
 		
-		JRadioButton r1=new JRadioButton("Museu");    
+		JRadioButton r1=new JRadioButton("Museu"); 
+		r1.setBounds(50,360,100,30);
+		r1.setOpaque(false);
+		r1.setContentAreaFilled(false);
+		r1.setBorderPainted(false);
+		r1.setFont(new Font("Arial", Font.BOLD, 14));
+		r1.setForeground(Color.WHITE);
+		
 		JRadioButton r2=new JRadioButton("Monumento");   
-		r1.setBounds(90,150,100,30);
-		r2.setBounds(240,150,100,30);
+		r2.setBounds(170,360,120,30);
+		r2.setOpaque(false);
+		r2.setContentAreaFilled(false);
+		r2.setBorderPainted(false);
+		r2.setFont(new Font("Arial", Font.BOLD, 14));
+		r2.setForeground(Color.WHITE);
 		
 		ButtonGroup bg = new ButtonGroup();    
 		bg.add(r1);
 		bg.add(r2);  
 		
 		JButton ok = new JButton("Continuar");
-		ok.setBounds(280,200,120,20);
+		ok.setBounds(200,500,120,20);
+		ok.setBackground(Color.WHITE);
+		ok.setFont(new Font("Arial", Font.BOLD, 14));
 		ok.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -389,8 +459,10 @@ public class Menu {
 			}
 		});
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(160,200,120,20);
+		JButton back = new JButton("<<<");
+		back.setBounds(250,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -408,9 +480,10 @@ public class Menu {
 		frame.add(loc);
 		frame.add(r1);
 		frame.add(r2);
+		frame.add(imagem);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		frame.setSize(450,300);
+		frame.setSize(360,600);
 		frame.setTitle("Projeto");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -424,8 +497,13 @@ public class Menu {
 	public void drawSeeLocal() {
 		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
 		JLabel label = new JLabel("Tipos de locais");
-		label.setBounds(90,30,200,50);
+		label.setBounds(50,60,200,50);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		DefaultListModel<String> locaisList = new DefaultListModel<>();
 		
@@ -433,10 +511,12 @@ public class Menu {
 		locaisList.addElement("Monumentos");
 		
 		JList<String> list = new JList<>(locaisList);
-		list.setBounds(90, 80, 250, 100);
+		list.setBounds(40, 120, 250, 100);
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(150,220,120,20);
+		JButton back = new JButton("<<<");
+		back.setBounds(250,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -444,10 +524,12 @@ public class Menu {
 			}
 		});
 		
-		JButton btn = new JButton("OK");
-		btn.setBounds(150,200,120,20);
+		JButton ok = new JButton("Continuar");
+		ok.setBounds(200,500,120,20);
+		ok.setBackground(Color.WHITE);
+		ok.setFont(new Font("Arial", Font.BOLD, 14));
 		
-		btn.addActionListener(new ActionListener() {
+		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedIndex() == 0) {
 					drawSeeLocalMuseus();
@@ -462,10 +544,11 @@ public class Menu {
 		});
 		
 		frame.add(label);
-		frame.add(btn);
+		frame.add(ok);
 		frame.add(list);
 		frame.add(back);
-		frame.setSize(460,320);
+		frame.add(imagem);
+		frame.setSize(360,600);
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -478,41 +561,49 @@ public class Menu {
 	public void drawSeeLocalMuseus() {
 		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
 		JLabel label = new JLabel("Museus");
-		label.setBounds(60,30,200,50);
-		
-		JLabel labelNome = new JLabel("Nome: ");
-		labelNome.setBounds(350,80,200,50);
-		
-		JLabel labelInfo = new JLabel("Info: ");
-		labelInfo.setBounds(350,100,200,50);
-		
-		JLabel labelLoc = new JLabel("Localizaçao: ");
-		labelLoc.setBounds(350,120,200,50);
+		label.setBounds(50,60,200,50);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		DefaultListModel<Local> museusList = new DefaultListModel<>();
 		
 		museusList.addAll(gereLocal.filterByType(LocalTipo.MUSEU));
 		
 		JList<Local> listMuseus = new JList<>(museusList);
-		listMuseus.setBounds(60, 80, 250, 100);
+		listMuseus.setBounds(40, 120, 250, 100);
 		
 		listMuseus.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				if (listMuseus.getSelectedIndex() != -1) {
-					labelNome.setText("Nome: " + museusList.get(listMuseus.getSelectedIndex()).getNome());
-					labelInfo.setText("Info: " + museusList.get(listMuseus.getSelectedIndex()).getInfo());
-					labelLoc.setText("Localizacao: " + museusList.get(listMuseus.getSelectedIndex()).getLoc());
-					frame.add(labelNome);
-					frame.add(labelInfo);
-					frame.add(labelLoc);
-					frame.repaint();
-				}
+				JLabel labelNome = new JLabel("Nome: " + museusList.get(listMuseus.getSelectedIndex()).getNome());
+				labelNome.setBounds(60,240,60,30);
+				labelNome.setForeground(Color.WHITE);
+				labelNome.setFont(new Font("Arial", Font.BOLD, 16));
+				
+				JLabel labelInfo = new JLabel("Info: " + museusList.get(listMuseus.getSelectedIndex()).getInfo());
+				labelInfo.setBounds(50,240,200,550);
+				labelInfo.setForeground(Color.WHITE);
+				labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
+				
+				JLabel labelLoc = new JLabel("Localizacao: " + museusList.get(listMuseus.getSelectedIndex()).getLoc());
+				labelLoc.setBounds(50,280,200,550);
+				labelLoc.setForeground(Color.WHITE);
+				labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
+				
+				frame.add(labelNome);
+				frame.add(labelInfo);
+				frame.add(labelLoc);
+				frame.repaint();
 			}
 		});
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(260,220,120,20);
+		JButton back = new JButton("<<<");
+		back.setBounds(250,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -523,7 +614,8 @@ public class Menu {
 		frame.add(label);
 		frame.add(listMuseus);
 		frame.add(back);
-		frame.setSize(640,320);
+		frame.add(imagem);
+		frame.setSize(360,600);
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -536,40 +628,48 @@ public class Menu {
 	public void drawSeeLocalMonumentos() {
 		frame.getContentPane().removeAll();
 		
+		JLabel imagem = new JLabel(backgroundImage);
+		imagem.setBounds(0, 0, 360, 600);
+		
 		JLabel label = new JLabel("Monumentos");
-		label.setBounds(60,30,200,50);
-		
-		JLabel labelNome = new JLabel("Nome: ");
-		labelNome.setBounds(350,80,200,50);
-		
-		JLabel labelInfo = new JLabel("Info: ");
-		labelInfo.setBounds(350,100,200,50);
-		
-		JLabel labelLoc = new JLabel("Localizaçao: ");
-		labelLoc.setBounds(350,120,200,50);
+		label.setBounds(50,60,200,50);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
 		monumentosList.addAll(gereLocal.filterByType(LocalTipo.MONUMENTO));
 		
 		JList<Local> listMonumentos = new JList<>(monumentosList);
-		listMonumentos.setBounds(60, 80, 250, 100);
+		listMonumentos.setBounds(40, 120, 250, 100);
 		
 		listMonumentos.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				if (listMonumentos.getSelectedIndex() != -1) {
-					labelNome.setText("Nome: " + monumentosList.get(listMonumentos.getSelectedIndex()).getNome());
-					labelInfo.setText("Info: " + monumentosList.get(listMonumentos.getSelectedIndex()).getInfo());
-					labelLoc.setText("Localizacao: " + monumentosList.get(listMonumentos.getSelectedIndex()).getLoc());
-					frame.add(labelNome);
-					frame.add(labelInfo);
-					frame.add(labelLoc);
-					frame.repaint();
-				}
+				JLabel labelNome = new JLabel("Nome: " + monumentosList.get(listMonumentos.getSelectedIndex()).getNome());
+				labelNome.setBounds(60,240,60,30);
+				labelNome.setForeground(Color.WHITE);
+				labelNome.setFont(new Font("Arial", Font.BOLD, 16));
+				
+				JLabel labelInfo = new JLabel("Info: " + monumentosList.get(listMonumentos.getSelectedIndex()).getInfo());
+				labelInfo.setBounds(50,240,200,550);
+				labelInfo.setForeground(Color.WHITE);
+				labelInfo.setFont(new Font("Arial", Font.BOLD, 16));
+				
+				JLabel labelLoc = new JLabel("Localizacao: " + monumentosList.get(listMonumentos.getSelectedIndex()).getLoc());
+				labelLoc.setBounds(50,280,200,550);
+				labelLoc.setForeground(Color.WHITE);
+				labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
+				
+				frame.add(labelNome);
+				frame.add(labelInfo);
+				frame.add(labelLoc);
+				frame.repaint();
 			}
 		});
 		
-		JButton back = new JButton("Voltar");
-		back.setBounds(260,220,120,20);
+		JButton back = new JButton("<<<");
+		back.setBounds(250,20,70,20);
+		back.setBackground(Color.WHITE);
+		back.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -580,7 +680,8 @@ public class Menu {
 		frame.add(label);
 		frame.add(listMonumentos);
 		frame.add(back);
-		frame.setSize(640,320);
+		frame.add(imagem);
+		frame.setSize(360,600);
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);

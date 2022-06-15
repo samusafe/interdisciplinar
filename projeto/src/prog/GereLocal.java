@@ -123,25 +123,25 @@ public class GereLocal {
 						}
 					}
 					if (menu == 2) {
-						System.out.println("-> Informa��o nova?");
+						System.out.println("-> Informacao nova?");
 						String novaInfo = scan.nextLine();
 						if (novaInfo.equals(local.getLoc())) {
-							System.out.println("Conv�m mudares a info");
+							System.out.println("Convem mudares a info");
 						}
 						else {
 							locais.get(i).setInfo(novaInfo);
-							System.out.println("-> Informa��o alterada com sucesso");
+							System.out.println("-> Informacao alterada com sucesso");
 						}
 					}
 					if (menu == 3) {
-						System.out.println("-> Localiza��o nova?");
+						System.out.println("-> Localizacao nova?");
 						String novaLoc = scan.nextLine();
 						if (novaLoc.equals(local.getLoc())) {
-							System.out.println("Conv�m mudares a localiza��o");
+							System.out.println("Convem mudares a localiza��o");
 						}
 						else {
 							locais.get(i).setLoc(novaLoc);
-							System.out.println("-> Localiza��o alterada com sucesso");
+							System.out.println("-> Localizacao alterada com sucesso");
 						}
 					}
 				}
