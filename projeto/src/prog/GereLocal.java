@@ -160,7 +160,7 @@ public class GereLocal {
 		}
 	}
 	
-	private ArrayList<Local> filterByType(LocalTipo type) {
+	static ArrayList<Local> filterByType(LocalTipo type) {
 		ArrayList<Local> locaisFiltrados = new ArrayList<>();
 		for(Local local: locais) {
 			if (local.getTipo() == type)

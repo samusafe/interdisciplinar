@@ -423,18 +423,18 @@ public class Menu {
 		frame.getContentPane().removeAll();
 		
 		DefaultListModel<String> locaisList = new DefaultListModel<>();
-		locaisList.addElement("Museus");
-		locaisList.addElement("Monumentos");
-		
 		DefaultListModel<Local> museusList = new DefaultListModel<>();
 		DefaultListModel<Local> monumentosList = new DefaultListModel<>();
 		
-		for (int i = 0; i < GereLocal.locais.size(); i++) {
-			if (GereLocal.locais.get(i).getTipo() == LocalTipo.MUSEU) {
-				museusList.addElement(GereLocal.locais.get(i));
-			} else {
-				monumentosList.addElement(GereLocal.locais.get(i));
-			}
+		locaisList.addElement("Museus");
+		locaisList.addElement("Monumentos");
+		
+		for (int i = 0; i < GereLocal.filterByType(LocalTipo.MUSEU).size(); i++) {
+			museusList.addElement(GereLocal.filterByType(LocalTipo.MUSEU).get(i));
+		}
+		
+		for (int i = 0; i < GereLocal.filterByType(LocalTipo.MONUMENTO).size(); i++) {
+			monumentosList.addElement(GereLocal.filterByType(LocalTipo.MONUMENTO).get(i));
 		}
 		
 		JList<String> list = new JList<>(locaisList);
@@ -448,6 +448,18 @@ public class Menu {
 		
 		JLabel label = new JLabel("Tipos de locais");
 		label.setBounds(90,30,200,50);
+		
+		JLabel labelEach = new JLabel("Informação sobre o local");
+		labelEach.setBounds(400,30,200,50);
+		
+		JLabel labelNome = new JLabel("Nome: ");
+		labelNome.setBounds(400,80,200,50);
+		
+		JLabel labelInfo = new JLabel("Info: ");
+		labelInfo.setBounds(400,100,200,50);
+		
+		JLabel labelLoc = new JLabel("Localizaçao: ");
+		labelLoc.setBounds(400,120,200,50);
 		
 		JButton back = new JButton("Voltar");
 		back.setBounds(150,220,120,20);
@@ -463,14 +475,12 @@ public class Menu {
 		
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String msg = "";
 				
 				if (list.getSelectedIndex() == 0) {
 					frame.remove(list);
 					frame.remove(back);
-					msg = list.getSelectedValue();
-					label.setText(msg);
-					
+					frame.remove(btn);
+					label.setText(list.getSelectedValue());
 					JButton backIn = new JButton("Voltar");
 					backIn.setBounds(150,220,120,20);
 					
@@ -480,16 +490,39 @@ public class Menu {
 						}
 					});
 					
+					JButton btnIn = new JButton("OK");
+					btnIn.setBounds(150,200,120,20);
+					
+					btnIn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if (list3.getSelectedIndex() != -1) {
+								labelNome.setText("Nome: " + GereLocal.filterByType(LocalTipo.MUSEU).get(list3.getSelectedIndex()).getNome());
+								labelInfo.setText("Info: " + GereLocal.filterByType(LocalTipo.MUSEU).get(list3.getSelectedIndex()).getInfo());
+								labelLoc.setText("Localizacao: " + GereLocal.filterByType(LocalTipo.MUSEU).get(list3.getSelectedIndex()).getLoc());
+								frame.add(labelNome);
+								frame.add(labelInfo);
+								frame.add(labelLoc);
+								frame.repaint();
+							} else {
+								showError("Escolha um local");
+								return;
+							}
+						}	
+					});
+					
 					frame.add(list3);
+					frame.add(labelEach);
 					frame.add(backIn);
+					frame.add(btnIn);
+					frame.setSize(820,320);
 					frame.repaint();
 				}
 				
 				if (list.getSelectedIndex() == 1) {
 					frame.remove(list);
 					frame.remove(back);
-					msg = list.getSelectedValue();
-					label.setText(msg);
+					frame.remove(btn);
+					label.setText(list.getSelectedValue());
 					
 					JButton backIn = new JButton("Voltar");
 					backIn.setBounds(150,220,120,20);
@@ -502,6 +535,7 @@ public class Menu {
 					
 					frame.add(list2);
 					frame.add(backIn);
+					frame.setSize(820,320);
 					frame.repaint();
 				}
 			}
