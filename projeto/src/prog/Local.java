@@ -60,7 +60,6 @@ public class Local {
 		return avaliacoes;
 	}
 	
-	
 	public void addAvaliacao(Avaliacao avaliacao) {
 		for (int i = 0; i < avaliacoes.size(); i++) {
 			if (avaliacoes.get(i).getUser() == avaliacao.getUser()) {
