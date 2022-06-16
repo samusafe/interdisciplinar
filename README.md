@@ -18,7 +18,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Tentar remover código para ficar mais simples
 - [ ] Terminar execução do programa
 
-
 ## 📫 Contribuindo para interdisciplinar
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 Para contribuir com interdisciplinar, siga estas etapas:
