@@ -32,16 +32,6 @@ public class GereLocal {
 		return locais.add(local);
 	}
 	
-	public void printAtividade() {
-		for (int i = 0; i < locais.size(); i++) {
-			for (int j = 0; j < locais.get(i).getAvaliacoes().size(); j++) {
-				System.out.println("-> " + locais.get(i).getAvaliacoes().get(j).getUser().getNome() 
-						+ " deu uma avalia��o de " + locais.get(i).getAvaliacoes().get(j).getRate()
-						+ " ao " + locais.get(i).getNome());
-			}
-		}
-	}
-	
 	void replaceLocal(Local local) {
 		for (int i = 0; i < locais.size(); i++) {
 			if (locais.get(i).equals(local)) {

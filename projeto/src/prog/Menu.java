@@ -9,7 +9,6 @@ import prog.Local.LocalTipo;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
-import java.awt.Toolkit;
 import java.awt.event.*;
 
 public class Menu {
