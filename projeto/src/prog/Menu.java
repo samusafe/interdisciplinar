@@ -537,16 +537,18 @@ public class Menu {
 		ok.setFont(new Font("Arial", Font.BOLD, 14));
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (list.getSelectedIndex() == - 1) {
+				LocalTipo tipo;
+				if (list.getSelectedIndex() == -1) {
 					showError("Escolha um tipo");
 				}
-				LocalTipo tipo;
 				if (list.getSelectedIndex() == 0) {
 					tipo = LocalTipo.MUSEU;
-				} else { 
+					drawEditLocalDetail(tipo, conta);
+				} 
+				if (list.getSelectedIndex() == 1) { 
 					tipo = LocalTipo.MONUMENTO;
+					drawEditLocalDetail(tipo, conta);
 				}
-				drawEditLocalDetail(tipo, conta);
 			}		
 		});
 		
@@ -623,8 +625,12 @@ public class Menu {
 		editNome.setFont(new Font("Arial", Font.BOLD, 14));
 		editNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tipo = "nome";
-				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
+				if (listLocal.getSelectedIndex() != -1) {
+					String tipo = "nome";
+					drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
+				} else {
+					showError("Escolha um local");
+				}
 			}
 		});
 		
@@ -634,8 +640,12 @@ public class Menu {
 		editInfo.setFont(new Font("Arial", Font.BOLD, 14));
 		editInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tipo = "info";
-				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
+				if (listLocal.getSelectedIndex() != -1) {
+					String tipo = "info";
+					drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
+				} else {
+					showError("Escolha um local");
+				}
 			}
 		});
 		
@@ -645,8 +655,12 @@ public class Menu {
 		editLoc.setFont(new Font("Arial", Font.BOLD, 14));
 		editLoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tipo = "localizacao";
-				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
+				if (listLocal.getSelectedIndex() != -1) {
+					String tipo = "localizacao";
+					drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
+				} else {
+					showError("Escolha um local");
+				}
 			}
 		});
 		
@@ -830,16 +844,18 @@ public class Menu {
 		ok.setFont(new Font("Arial", Font.BOLD, 14));
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (list.getSelectedIndex() == - 1) {
-					showError("Escolha um tipo de local");
-				}
 				LocalTipo tipo;
+				if (list.getSelectedIndex() == -1) {
+					showError("Escolha um tipo");
+				}
 				if (list.getSelectedIndex() == 0) {
 					tipo = LocalTipo.MUSEU;
-				} else { 
+					drawSeeLocalDetail(tipo, conta);
+				} 
+				if (list.getSelectedIndex() == 1) { 
 					tipo = LocalTipo.MONUMENTO;
+					drawSeeLocalDetail(tipo, conta);
 				}
-				drawSeeLocalDetail(tipo, conta);
 			}		
 		});
 		
