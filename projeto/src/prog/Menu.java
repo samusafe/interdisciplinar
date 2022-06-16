@@ -17,8 +17,8 @@ public class Menu {
 	private GereConta gereConta = new GereConta();
 	private GereLocal gereLocal = new GereLocal();
 	private ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/img/background.jpeg"));
-	java.net.URL iconURL = getClass().getResource("/img/icon.png");
-	ImageIcon icon = new ImageIcon(iconURL);
+	private java.net.URL iconURL = getClass().getResource("/img/icon.png");
+	private ImageIcon icon = new ImageIcon(iconURL);
 	
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
@@ -134,12 +134,7 @@ public class Menu {
 					return;
 				}
 				
-				String pw = "";
-				for (int i = 0; i < password.getPassword().length; i++) {
-					pw += password.getPassword()[i];
-				}
-				
-				Conta conta = gereConta.entrarConta(name.getText(), pw);
+				Conta conta = gereConta.entrarConta(name.getText(), password.getPassword());
 				
 				if (tipo == ContaType.TURISTA) {
 					drawTuristaMenu(conta);
@@ -167,11 +162,6 @@ public class Menu {
 		frame.add(r2);
 		frame.add(imagem);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(360,600);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -214,17 +204,12 @@ public class Menu {
 					return;
 				}
 				
-				if (GereConta.contas.size() == 0) {
+				if (!gereConta.hasContas()) {
 					showError("Nenhuma conta criada");
 					return;
 				}
 				else {
-					String pw = "";
-					for (int i = 0; i < password.getPassword().length; i++) {
-						pw += password.getPassword()[i];
-					}
-					
-					Conta conta = gereConta.entrarConta(name.getText(), pw);
+					Conta conta = gereConta.entrarConta(name.getText(), password.getPassword());
 					if (conta == null) {
 						showError("Conta não existe");
 						return;
@@ -258,11 +243,6 @@ public class Menu {
 		frame.add(password);
 		frame.add(imagem);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(360,600);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -320,13 +300,7 @@ public class Menu {
 		frame.add(atividade);
 		frame.add(back);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -372,15 +346,8 @@ public class Menu {
 		frame.add(ver);
 		frame.add(back);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
-		
 	}
 	
 	public void drawCreateLocal(Conta conta) {
@@ -494,11 +461,6 @@ public class Menu {
 		frame.add(r2);
 		frame.add(imagem);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(360,600);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -540,6 +502,7 @@ public class Menu {
 				LocalTipo tipo;
 				if (list.getSelectedIndex() == -1) {
 					showError("Escolha um tipo");
+					return;
 				}
 				if (list.getSelectedIndex() == 0) {
 					tipo = LocalTipo.MUSEU;
@@ -557,13 +520,7 @@ public class Menu {
 		frame.add(list);
 		frame.add(back);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -684,13 +641,7 @@ public class Menu {
 		frame.add(editInfo);
 		frame.add(editLoc);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -750,11 +701,6 @@ public class Menu {
 		frame.add(novo);
 		frame.add(imagem);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(360,600);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -770,13 +716,7 @@ public class Menu {
 		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		DefaultListModel<String> activityList = new DefaultListModel<>();	
-		
-		for (int i = 0; i < GereLocal.locais.size(); i++) {
-			for (int j = 0; j < GereLocal.locais.get(i).getAvaliacoes().size(); j++) {
-				activityList.addElement(GereLocal.locais.get(i).getAvaliacoes().get(j).getUser().getNome() + " avaliou " 
-			+ GereLocal.locais.get(i).getAvaliacoes().get(j).getRate() + " ao " + GereLocal.locais.get(i).getNome());
-			}
-		}
+		activityList.addAll(gereLocal.getActivity());
 		
 		JList<String> list = new JList<>(activityList);
 		list.setBounds(40, 120, 250, 100);
@@ -799,13 +739,7 @@ public class Menu {
 		frame.add(scrollPane);
 		frame.add(back);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -847,6 +781,7 @@ public class Menu {
 				LocalTipo tipo;
 				if (list.getSelectedIndex() == -1) {
 					showError("Escolha um tipo");
+					return;
 				}
 				if (list.getSelectedIndex() == 0) {
 					tipo = LocalTipo.MUSEU;
@@ -864,13 +799,7 @@ public class Menu {
 		frame.add(list);
 		frame.add(back);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -929,9 +858,9 @@ public class Menu {
 				labelLoc.setText("Localizacao: " + localList.get(listLocal.getSelectedIndex()).getLoc());
 				if (localList.get(listLocal.getSelectedIndex()).hasAvaliacoes()) {
 					labelRate.setText("Classificaçao -> " + localList.get(listLocal.getSelectedIndex()).getRate());
-					labelRate.setVisible(true);;
+					labelRate.setVisible(true);
 				} else {
-					labelRate.setVisible(false);;
+					labelRate.setVisible(false);
 				}
 			}
 		});
@@ -943,17 +872,14 @@ public class Menu {
 		avaliar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listLocal.getSelectedIndex() != -1) {
-					String entrada;
-				    int num;
-
-				    entrada = JOptionPane.showInputDialog("Avalie de 1 a 5");
-				    num = Integer.parseInt(entrada);
-				    if (num < 1 || num > 5) {
+				    String entrada = JOptionPane.showInputDialog("Avalie de 1 a 5");
+				    int rate = Integer.parseInt(entrada);
+				    if (rate < 1 || rate > 5) {
 				    	showError("Avalie de 1 a 5");
+				    	return;
 				    } else {
-				    	Avaliacao avaliacao = new Avaliacao(num, conta);
-				    	localList.get(listLocal.getSelectedIndex()).addAvaliacao(avaliacao);
-						gereLocal.replaceLocal(localList.get(listLocal.getSelectedIndex()));
+				    	gereLocal.addAvaliacao(rate, conta, localList.get(listLocal.getSelectedIndex()));
+				    	drawSeeLocalDetail(tipo, conta);
 				    }
 				} else {
 					showError("Escolha um local");
@@ -980,13 +906,7 @@ public class Menu {
 		frame.add(labelRate);
 		frame.add(avaliar);
 		frame.add(imagem);
-		frame.setSize(360,600);
-		frame.setLayout(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
@@ -1031,18 +951,17 @@ public class Menu {
 					return;
 				}
 				
-				if (GereLocal.locais.size() == 0) {
+				if (!gereLocal.hasLocais()) {
 					showError("Nenhum local criado");
 					return;
-				}
-				else {
-					for (int i = 0; i < GereLocal.locais.size(); i++) {
-						if (name.getText().equals(GereLocal.locais.get(i).getNome())) {
-							int j = i;
-							labelNome.setText("Nome: " + GereLocal.locais.get(j).getNome());
-							labelInfo.setText("Info: " + GereLocal.locais.get(j).getInfo());
-							labelLoc.setText("Localizacao: " + GereLocal.locais.get(j).getLoc());
-						}
+				} else {
+					Local local = gereLocal.getLocalByName(name.getText());
+					if (local != null) {
+						labelNome.setText("Nome: " + local.getNome());
+						labelInfo.setText("Info: " + local.getInfo());
+						labelLoc.setText("Localizacao: " + local.getLoc());
+					} else {
+						showError("Local nao encontrado");
 					}
 				}
 			}
@@ -1067,11 +986,6 @@ public class Menu {
 		frame.add(name);
 		frame.add(imagem);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setSize(360,600);
-		frame.setTitle("Projeto");
-		frame.setIconImage(icon.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
 	
