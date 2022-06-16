@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.Collection;
 
 public class Menu {
 
@@ -17,8 +18,6 @@ public class Menu {
 	private GereConta gereConta = new GereConta();
 	private GereLocal gereLocal = new GereLocal();
 	private ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/img/background.jpeg"));
-	private ImageIcon notSelectedImage = new ImageIcon(getClass().getResource("/img/not_selected.png"));
-	private ImageIcon selectedImage = new ImageIcon(getClass().getResource("/img/selected.png"));
 	
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
@@ -134,10 +133,17 @@ public class Menu {
 					return;
 				}
 				
+				String pw = "";
+				for (int i = 0; i < password.getPassword().length; i++) {
+					pw += password.getPassword()[i];
+				}
+				
+				Conta conta = gereConta.entrarConta(name.getText(), pw);
+				
 				if (tipo == ContaType.TURISTA) {
-					drawTuristaMenu();
+					drawTuristaMenu(conta);
 				} else {
-					drawAdminMenu();
+					drawAdminMenu(conta);
 				}
 			}
 		});
@@ -219,14 +225,14 @@ public class Menu {
 					
 					Conta conta = gereConta.entrarConta(name.getText(), pw);
 					if (conta == null) {
-						showError("Conta n�o existe");
+						showError("Conta não existe");
 						return;
 					}
 					
 					if  (conta.getTipo() == ContaType.ADMIN) {
-						drawAdminMenu();
+						drawAdminMenu(conta);
 					} else {
-						drawTuristaMenu();
+						drawTuristaMenu(conta);
 					}
 				}
 				
@@ -259,7 +265,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawAdminMenu() {
+	public void drawAdminMenu(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -272,7 +278,7 @@ public class Menu {
 		criar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				drawCreateLocal();
+				drawCreateLocal(conta);
 			}
 		});
 		
@@ -283,7 +289,7 @@ public class Menu {
 		edit.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				drawEditLocal ();
+				drawEditLocal(conta);
 			}
 		});
 		
@@ -294,7 +300,7 @@ public class Menu {
 		atividade.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				drawActivity();
+				drawActivity(conta);
 			}
 		});
 		
@@ -323,7 +329,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawTuristaMenu() {
+	public void drawTuristaMenu(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -336,7 +342,7 @@ public class Menu {
 		ver.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				drawSeeLocal();
+				drawSeeLocal(conta);
 			}
 		});
 		
@@ -347,7 +353,7 @@ public class Menu {
 		pesquisar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				drawSearchLocal ();
+				drawSearchLocal(conta);
 			}
 		});
 		
@@ -376,7 +382,7 @@ public class Menu {
 		
 	}
 	
-	public void drawCreateLocal() {
+	public void drawCreateLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -462,7 +468,7 @@ public class Menu {
 					return;
 				}
 				showError("Local criado");
-				drawAdminMenu();
+				drawAdminMenu(conta);
 			}
 		});
 		
@@ -472,7 +478,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawAdminMenu();
+				drawAdminMenu(conta);
 			}
 		});
 		
@@ -496,7 +502,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawEditLocal() {
+	public void drawEditLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -521,7 +527,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawAdminMenu();
+				drawAdminMenu(conta);
 			}
 		});
 		
@@ -540,7 +546,7 @@ public class Menu {
 				} else { 
 					tipo = LocalTipo.MONUMENTO;
 				}
-				drawEditLocalDetail(tipo);
+				drawEditLocalDetail(tipo, conta);
 			}		
 		});
 		
@@ -559,7 +565,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawEditLocalDetail(LocalTipo tipo) {
+	public void drawEditLocalDetail(LocalTipo tipo, Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -618,7 +624,7 @@ public class Menu {
 		editNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = "nome";
-				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo);
+				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
 			}
 		});
 		
@@ -629,7 +635,7 @@ public class Menu {
 		editInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = "info";
-				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo);
+				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
 			}
 		});
 		
@@ -640,7 +646,7 @@ public class Menu {
 		editLoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = "localizacao";
-				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo);
+				drawEdit(localList.get(listLocal.getSelectedIndex()), tipo, conta);
 			}
 		});
 		
@@ -650,7 +656,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawEditLocal();
+				drawEditLocal(conta);
 			}
 		});
 		
@@ -674,7 +680,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawEdit(Local local, String tipo) {
+	public void drawEdit(Local local, String tipo, Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -701,15 +707,15 @@ public class Menu {
 				}
 				if (tipo == "nome") {
 					local.setNome(novo.getText());
-					drawEditLocal();
+					drawEditLocal(conta);
 				}
 				if (tipo == "info") {
 					local.setInfo(novo.getText());
-					drawEditLocal();
+					drawEditLocal(conta);
 				}
 				if (tipo == "localizacao") {
 					local.setLoc(novo.getText());
-					drawEditLocal();
+					drawEditLocal(conta);
 				}
 			}
 		});
@@ -720,7 +726,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawEditLocal();
+				drawEditLocal(conta);
 			}
 		});
 		
@@ -738,7 +744,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawActivity() {
+	public void drawActivity(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -749,10 +755,21 @@ public class Menu {
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		DefaultListModel<Avaliacao> activityList = new DefaultListModel<>();	
+		DefaultListModel<String> activityList = new DefaultListModel<>();	
 		
-		JList<Avaliacao> list = new JList<>(activityList);
-		list.setBounds(40, 120, 250, 100);
+		for (int i = 0; i < GereLocal.locais.size(); i++) {
+			for (int j = 0; j < GereLocal.locais.get(i).getAvaliacoes().size(); j++) {
+				activityList.addElement(GereLocal.locais.get(i).getAvaliacoes().get(j).getUser().getNome() + " avaliou " 
+			+ GereLocal.locais.get(i).getAvaliacoes().get(j).getRate() + " ao " + GereLocal.locais.get(i).getNome());
+			}
+		}
+		
+		JList<String> list = new JList<>(activityList);
+		list.setBounds(40, 200, 250, 100);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(40, 120, 250, 120);
+		scrollPane.setViewportView(list);
 		
 		JButton back = new JButton("<<<");
 		back.setBounds(20,20,70,20);
@@ -760,12 +777,12 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawAdminMenu();
+				drawAdminMenu(conta);
 			}
 		});
 		
 		frame.add(label);
-		frame.add(list);
+		frame.add(scrollPane);
 		frame.add(back);
 		frame.add(imagem);
 		frame.setSize(360,600);
@@ -778,7 +795,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawSeeLocal() {
+	public void drawSeeLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -803,7 +820,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawTuristaMenu();
+				drawTuristaMenu(conta);
 			}
 		});
 		
@@ -822,7 +839,7 @@ public class Menu {
 				} else { 
 					tipo = LocalTipo.MONUMENTO;
 				}
-				drawSeeLocalDetail(tipo);
+				drawSeeLocalDetail(tipo, conta);
 			}		
 		});
 		
@@ -841,7 +858,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawSeeLocalDetail(LocalTipo tipo) {
+	public void drawSeeLocalDetail(LocalTipo tipo, Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -874,8 +891,12 @@ public class Menu {
 		labelLoc.setForeground(Color.WHITE);
 		labelLoc.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		DefaultListModel<Local> localList = new DefaultListModel<>();
+		JLabel labelRate = new JLabel("");
+		labelRate.setBounds(50,340,550,30);
+		labelRate.setForeground(Color.WHITE);
+		labelRate.setFont(new Font("Arial", Font.BOLD, 16));
 		
+		DefaultListModel<Local> localList = new DefaultListModel<>();
 		localList.addAll(gereLocal.filterByType(tipo));	
 		
 		JList<Local> listLocal = new JList<>(localList);
@@ -890,7 +911,38 @@ public class Menu {
 				labelNome.setText("Nome: " + localList.get(listLocal.getSelectedIndex()).getNome());
 				labelInfo.setText("Info: " + localList.get(listLocal.getSelectedIndex()).getInfo());
 				labelLoc.setText("Localizacao: " + localList.get(listLocal.getSelectedIndex()).getLoc());
+				if (localList.get(listLocal.getSelectedIndex()).hasAvaliacoes()) {
+					labelRate.setText("Classificaçao -> " + localList.get(listLocal.getSelectedIndex()).getRate());
+					labelRate.setVisible(true);;
+				} else {
+					labelRate.setVisible(false);;
+				}
 			}
+		});
+		
+		JButton avaliar = new JButton("Avaliar");
+		avaliar.setBounds(200,500,120,20);
+		avaliar.setBackground(Color.WHITE);
+		avaliar.setFont(new Font("Arial", Font.BOLD, 14));
+		avaliar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (listLocal.getSelectedIndex() != -1) {
+					String entrada;
+				    int num;
+
+				    entrada = JOptionPane.showInputDialog("Avalie de 1 a 5");
+				    num = Integer.parseInt(entrada);
+				    if (num < 1 || num > 5) {
+				    	showError("Avalie de 1 a 5");
+				    } else {
+				    	Avaliacao avaliacao = new Avaliacao(num, conta);
+				    	localList.get(listLocal.getSelectedIndex()).addAvaliacao(avaliacao);
+						gereLocal.replaceLocal(localList.get(listLocal.getSelectedIndex()));
+				    }
+				} else {
+					showError("Escolha um local");
+				}
+			}		
 		});
 		
 		JButton back = new JButton("<<<");
@@ -899,7 +951,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawSeeLocal();
+				drawSeeLocal(conta);
 			}
 		});
 		
@@ -909,6 +961,8 @@ public class Menu {
 		frame.add(labelNome);
 		frame.add(labelInfo);
 		frame.add(labelLoc);
+		frame.add(labelRate);
+		frame.add(avaliar);
 		frame.add(imagem);
 		frame.setSize(360,600);
 		frame.setLayout(null);
@@ -920,7 +974,7 @@ public class Menu {
 		frame.repaint();
 	}
 	
-	public void drawSearchLocal() {
+	public void drawSearchLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
 		JLabel imagem = new JLabel(backgroundImage);
@@ -984,7 +1038,7 @@ public class Menu {
 		back.setFont(new Font("Arial", Font.BOLD, 14));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				drawTuristaMenu();
+				drawTuristaMenu(conta);
 			}
 		});
 		

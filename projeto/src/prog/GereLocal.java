@@ -42,6 +42,14 @@ public class GereLocal {
 		}
 	}
 	
+	void replaceLocal(Local local) {
+		for (int i = 0; i < locais.size(); i++) {
+			if (locais.get(i).equals(local)) {
+				locais.set(i, local);
+			}
+		}
+	}
+	
 	ArrayList<Local> filterByType(LocalTipo type) {
 		ArrayList<Local> locaisFiltrados = new ArrayList<>();
 		for(Local local: locais) {
