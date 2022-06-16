@@ -8,9 +8,9 @@ import prog.Local.LocalTipo;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
-import java.util.Collection;
 
 public class Menu {
 
@@ -18,6 +18,8 @@ public class Menu {
 	private GereConta gereConta = new GereConta();
 	private GereLocal gereLocal = new GereLocal();
 	private ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/img/background.jpeg"));
+	java.net.URL iconURL = getClass().getResource("/img/icon.png");
+	ImageIcon icon = new ImageIcon(iconURL);
 	
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
@@ -55,7 +57,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -129,7 +131,7 @@ public class Menu {
 				}
 				
 				if (!gereConta.criarConta(name.getText(), password.getPassword(), tipo)) {
-					showError("Ja existe uma conta");
+					showError("Conta duplicada");
 					return;
 				}
 				
@@ -169,7 +171,7 @@ public class Menu {
 		frame.setResizable(false);
 		frame.setSize(360,600);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -260,7 +262,7 @@ public class Menu {
 		frame.setResizable(false);
 		frame.setSize(360,600);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -324,7 +326,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -376,7 +378,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 		
@@ -464,10 +466,9 @@ public class Menu {
 				}
 				
 				if (gereLocal.criarLocal(name.getText(), info.getText(), loc.getText(), tipo) == false) {
-					showError("Ja existe um local com essas informacoes");
+					showError("Local duplicado");
 					return;
 				}
-				showError("Local criado");
 				drawAdminMenu(conta);
 			}
 		});
@@ -497,7 +498,7 @@ public class Menu {
 		frame.setResizable(false);
 		frame.setSize(360,600);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -538,7 +539,7 @@ public class Menu {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedIndex() == - 1) {
-					showError("Escolha um tipo de local");
+					showError("Escolha um tipo");
 				}
 				LocalTipo tipo;
 				if (list.getSelectedIndex() == 0) {
@@ -560,7 +561,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -675,7 +676,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -739,7 +740,7 @@ public class Menu {
 		frame.setResizable(false);
 		frame.setSize(360,600);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -765,10 +766,10 @@ public class Menu {
 		}
 		
 		JList<String> list = new JList<>(activityList);
-		list.setBounds(40, 200, 250, 100);
+		list.setBounds(40, 120, 250, 100);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(40, 120, 250, 120);
+		scrollPane.setBounds(40, 120, 250, 200);
 		scrollPane.setViewportView(list);
 		
 		JButton back = new JButton("<<<");
@@ -790,7 +791,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -853,7 +854,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -969,7 +970,7 @@ public class Menu {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -1054,7 +1055,7 @@ public class Menu {
 		frame.setResizable(false);
 		frame.setSize(360,600);
 		frame.setTitle("Projeto");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img\\icon.jpg"));
+		frame.setIconImage(icon.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.repaint();
 	}
@@ -1064,10 +1065,10 @@ public class Menu {
 
 		JLabel errorLabel = new JLabel(error);
 		errorLabel.setBounds(20,0,100,70);
-
+		
 		errorFrame.add(errorLabel);
-		errorFrame.setSize(100,100);
-		errorFrame.setLayout(null);
+		errorFrame.setSize(220,150);
+		errorFrame.setLayout(new GridBagLayout());
 		errorFrame.setResizable(false);
 		errorFrame.setVisible(true);
 	}
