@@ -14,9 +14,9 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Corrigir bugs nos menus
-- [ ] Terminar os menus
-- [ ] Tentar remover código para ficar mais simples
-- [ ] Terminar execução do programa
+- [x] Terminar os menus
+- [x] Tentar remover código para ficar mais simples
+- [x] Terminar execução do programa
 
 ## 📫 Contribuindo para interdisciplinar
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
