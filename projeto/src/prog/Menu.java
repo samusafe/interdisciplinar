@@ -20,6 +20,9 @@ public class Menu {
 	private java.net.URL iconURL = getClass().getResource("/img/icon.png");
 	private ImageIcon icon = new ImageIcon(iconURL);
 	
+	/**
+	 * desenha o menu principal do programa
+	 */
 	public void drawMainMenu() {
 		frame.getContentPane().removeAll();
 		
@@ -61,6 +64,9 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu de criar conta
+	 */
 	public void drawCreateAccount() {
 		frame.getContentPane().removeAll();
 		
@@ -165,6 +171,9 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu de entrar na conta
+	 */
 	public void drawLoginAccount() {
 		frame.getContentPane().removeAll();
 		
@@ -246,6 +255,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu de admin
+	 * @param conta
+	 */
 	public void drawAdminMenu(Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -350,6 +363,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu de criar local
+	 * @param conta
+	 */
 	public void drawCreateLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -464,6 +481,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu de listar locais
+	 * @param conta
+	 */
 	public void drawEditLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -524,6 +545,11 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu que lista os locais de um tipo especifico
+	 * @param tipo
+	 * @param conta
+	 */
 	public void drawEditLocalDetail(LocalTipo tipo, Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -645,6 +671,12 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu de editar local
+	 * @param local
+	 * @param tipo
+	 * @param conta
+	 */
 	public void drawEdit(Local local, String tipo, Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -704,6 +736,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu que lista a atividade do programa
+	 * @param conta
+	 */
 	public void drawActivity(Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -743,6 +779,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu que lista os locais
+	 * @param conta
+	 */
 	public void drawSeeLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -803,6 +843,11 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu que lista a informaçao detalhada sobre o local selecionado
+	 * @param tipo
+	 * @param conta
+	 */
 	public void drawSeeLocalDetail(LocalTipo tipo, Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -910,6 +955,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o menu que permite a pesquisa de locais
+	 * @param conta
+	 */
 	public void drawSearchLocal(Conta conta) {
 		frame.getContentPane().removeAll();
 		
@@ -989,6 +1038,10 @@ public class Menu {
 		frame.repaint();
 	}
 	
+	/**
+	 * desenha o pop-up de erros
+	 * @param error
+	 */
 	public void showError(String error) {
 		JFrame errorFrame = new JFrame("Error");
 

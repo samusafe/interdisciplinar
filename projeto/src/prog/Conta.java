@@ -17,30 +17,57 @@ public class Conta {
 		this.tipo = tipo;
 	}
 
+	/**
+	 * get nome da conta
+	 * @return nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 	
+	/**
+	 * set nome da conta
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
+	/**
+	 * get password da conta
+	 * @return password
+	 */
 	public String getPassword() {
 		return password;
 	}
 	
+	/**
+	 * set password da conta
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * get tipo da conta
+	 * @return tipo
+	 */
 	public ContaType getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * set tipo da conta
+	 * @param tipo
+	 */
 	public void setTipo(ContaType tipo) {
 		this.tipo = tipo;
 	}
 	
+	/**
+	 * faz a comparaçao de contas para que nao existam repetidas
+	 */
 	@Override
 	public boolean equals(Object o) {
         if (o == this) {
